@@ -48,15 +48,20 @@
                     <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
                 </ul>
             </li>
+
             <li class="menu-header">Manage</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Manage User</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?= base_url('admin/user') ?>">User</a></li>
-                    <?php if (in_groups('admin')) : ?>
+                    <?php if (has_permission('manage role')) : ?>
                     <li><a href="<?= base_url('admin/role') ?>">Role</a></li>
-                    <li><a href="auth-login.html">Permission</a></li>
-                    <li><a href="auth-register.html">Role has permission</a></li>
+                    <?php endif; ?>
+                    <?php if (has_permission('manage permission')) : ?>
+                    <li><a href="<?= base_url('admin/permission') ?>">Permission</a></li>
+                    <?php endif; ?>
+                    <?php if (has_permission('manage role permission')) : ?>
+                    <li><a href="<?= base_url('admin/rolehaspermission') ?>">Role has permission</a></li>
                     <?php endif; ?>
                 </ul>
             </li>

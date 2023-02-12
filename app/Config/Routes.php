@@ -5,6 +5,8 @@ namespace Config;
 use App\Controllers\Role;
 use App\Controllers\User;
 use App\Controllers\Dashboard;
+use App\Controllers\Permission;
+use App\Controllers\RoleHasPermission;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -52,6 +54,20 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->get('role/(:num)', 'Role::edit/$1');
     $routes->put('role/(:num)', 'Role::update/$1');
     $routes->delete('role/(:num)', 'Role::delete/$1');
+
+    // routes manage permission
+    $routes->get('permission', 'Permission::index');
+    $routes->get('permission/new', 'Permission::new');
+    $routes->post('permission', 'Permission::create');
+    $routes->get('permission/(:num)', 'Permission::edit/$1');
+    $routes->put('permission/(:num)', 'Permission::update/$1');
+    $routes->delete('permission/(:num)', 'Permission::delete/$1');
+
+    // routes role has permission
+    $routes->get('rolehaspermission', 'RoleHasPermission::index');
+    $routes->get('rolehaspermission/(:num)', 'RoleHasPermission::show/$1');
+    $routes->post('changepermission', 'RoleHasPermission::changePermission');
+
 });
 
 /*

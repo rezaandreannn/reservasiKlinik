@@ -2,44 +2,43 @@
 
 namespace App\Controllers;
 
-use Myth\Auth\Models\GroupModel;
 use App\Controllers\BaseController;
+use Myth\Auth\Models\PermissionModel;
 
-class Role extends BaseController
+class Permission extends BaseController
 {
-    protected $role;
+
+    protected $permission;
 
     public function __construct(){
-        $this->role = new GroupModel();
+        $this->permission = new PermissionModel();
     }
-
     public function index()
     {
-
         $data = [
-            'title' => 'Manage Role',
+            'title' => 'Manage Permission',
             'breadcrumbs' => [
                 'Dashboard' => '',
             ],
-            'roles' => $this->role->findAll()
+            'permissions' => $this->permission->findAll()
         ];
 
-        return view('role/index', $data);
+        return view('permission/index', $data);
     }
 
     public function new(){
         session();
         $data = [
-            'title' => 'Create Role',
+            'title' => 'Create Permission',
             'breadcrumbs' => [
                 'Dashboard' => '',
-                'Role' => ''
+                'Permission' => ''
             ],
             'validation' => \Config\Services::validation() // untuk mencetak validasi di view
            
         ];
 
-        return view('role/create', $data);
+        return view('permission/create', $data);
     }
 
     public function create(){
@@ -61,25 +60,26 @@ class Role extends BaseController
     
 
     $data = $this->request->getPost(); //ambil inputan post
-    $this->role->insert($data); // simpan ke database
+    $this->permission->insert($data); // simpan ke database
 
-    return redirect()->to(base_url('admin/role'))->with('message', 'created role successfully');
+    return redirect()->to(base_url('admin/permission'))->with('message', 'created permission successfully');
     }
 
     public function edit($id = null){
+
         session();
         $data = [
-            'title' => 'Edit Role',
+            'title' => 'Edit Permission',
             'breadcrumbs' => [
                 'Dashboard' => '',
-                'Role' => ''
+                'Permission' => ''
             ],
-            'role' => $this->role->find($id),
+            'permission' => $this->permission->find($id),
             'validation' => \Config\Services::validation() // untuk mencetak validasi di view
            
         ];
 
-        return view('role/edit', $data);
+        return view('permission/edit', $data);
     }
 
     public function update($id = null){
@@ -101,16 +101,17 @@ class Role extends BaseController
     
 
     $data = $this->request->getPost(); //ambil inputan post
-    $this->role->update($id, $data); // simpan ke database
+    $this->permission->update($id, $data); // simpan ke database
 
-    return redirect()->to(base_url('admin/role'))->with('message', 'updated role successfully');
+    return redirect()->to(base_url('admin/permission'))->with('message', 'updated permission successfully');
     }
 
     public function delete($id = null){
 
-        $this->role->delete($id);
-        return redirect()->to(base_url('admin/role'))->with('message', 'deleteted role successfully');
+        $this->permission->delete($id);
+        return redirect()->to(base_url('admin/permission'))->with('message', 'deleteted permission successfully');
 
 
     }
+
 }
