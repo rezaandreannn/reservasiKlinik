@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Controllers\Role;
+use App\Controllers\User;
 use App\Controllers\Dashboard;
 
 // Create a new instance of our RouteCollection class.
@@ -35,14 +36,22 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
-$routes->get('role', 'Role::index');
-$routes->get('role/new', 'Role::new');
-$routes->post('role', 'Role::create');
-$routes->get('role/(:num)', 'Role::edit/$1');
-$routes->put('role/(:num)', 'Role::update/$1');
-$routes->delete('role/(:num)', 'Role::delete/$1');
 
-$routes->group('admin', function($routes) {
+
+
+$routes->group('admin', ['filter' => 'role:admin'], function($routes) {
+    // routes manage user
+    $routes->get('user', 'User::index');
+    $routes->post('manage_role', 'User::manageRole');
+    $routes->delete('user/(:num)', 'User::delete/$1');
+  
+    // routes manage role
+    $routes->get('role', 'Role::index');
+    $routes->get('role/new', 'Role::new');
+    $routes->post('role', 'Role::create');
+    $routes->get('role/(:num)', 'Role::edit/$1');
+    $routes->put('role/(:num)', 'Role::update/$1');
+    $routes->delete('role/(:num)', 'Role::delete/$1');
 });
 
 /*

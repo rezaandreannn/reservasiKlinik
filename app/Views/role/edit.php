@@ -17,7 +17,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= base_url('role/' .$role->id); ?>" method="post" autocomplete="off">
+                        <form action="<?= base_url('admin/role/' .$role->id); ?>" method="post" autocomplete="off">
                             <input type="hidden" name="_method" value="put">
                             <?= csrf_field() ?>
                             <div class="row">

@@ -17,7 +17,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= base_url('role'); ?>" method="post" autocomplete="off">
+                        <form action="<?= base_url('admin/role'); ?>" method="post" autocomplete="off">
                             <?= csrf_field() ?>
                             <div class="row">
                                 <div class="col-lg-12 col-md-8 col-sm-12">

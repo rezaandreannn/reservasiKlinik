@@ -52,11 +52,12 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Manage User</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="auth-forgot-password.html">User</a></li>
-                    <li><a href="auth-forgot-password.html">Role</a></li>
+                    <li><a href="<?= base_url('admin/user') ?>">User</a></li>
+                    <?php if (in_groups('admin')) : ?>
+                    <li><a href="<?= base_url('admin/role') ?>">Role</a></li>
                     <li><a href="auth-login.html">Permission</a></li>
-                    <li><a href="auth-register.html">Register</a></li>
-                    <li><a href="auth-reset-password.html">Reset Password</a></li>
+                    <li><a href="auth-register.html">Role has permission</a></li>
+                    <?php endif; ?>
                 </ul>
             </li>
         </ul>

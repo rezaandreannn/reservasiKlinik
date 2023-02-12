@@ -3,7 +3,7 @@
 <?= $this->section('main') ?>
 <section class="section">
     <div class="section-header">
-        <h1><?= $title ?> <a href="<?= base_url('role/new') ?>" class="btn btn-primary mb-2"><i
+        <h1><?= $title ?> <a href="<?= base_url('admin/role/new') ?>" class="btn btn-primary mb-2"><i
                     class="fas fa-plus-circle"></i> Create
             </a></h1>
 
@@ -36,9 +36,10 @@
                                 <td><?= $role->name ?></td>
                                 <td><?= $role->description ?></td>
                                 <td class="align-middle text-center p-2">
-                                    <a href="<?= base_url('role/'.$role->id) ?>" class="btn btn-sm btn-warning"><i
+                                    <a href="<?= base_url('admin/role/'.$role->id) ?>" class="btn btn-sm btn-warning"><i
                                             class="fas fa-pencil-alt"></i></a>
-                                    <form method="post" action="<?= base_url('role/'. $role->id) ?>" class="d-inline">
+                                    <form method="post" action="<?= base_url('admin/role/'. $role->id) ?>"
+                                        class="d-inline">
                                         <?= csrf_field()?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
