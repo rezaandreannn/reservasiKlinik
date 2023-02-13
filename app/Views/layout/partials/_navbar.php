@@ -14,7 +14,7 @@
                 <div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
+                <div class="dropdown-title">d</div>
                 <a href="features-profile.html" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>

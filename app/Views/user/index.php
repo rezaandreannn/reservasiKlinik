@@ -57,6 +57,7 @@
                                         <?php foreach($groups as $group) : ?>
                                         <td class="text-center" id="user<?= $user->userId ?>">
                                             <div class="custom-checkbox custom-control">
+                                                <?php if(has_permission('edit-user')) : ?>
                                                 <input type="checkbox" data-checkboxes="mygroup"
                                                     data-role="<?= $group->id ?>" data-user="<?= $user->userId ?>"
                                                     class="custom-control-input <?= $user->userId ?>"
@@ -66,10 +67,22 @@
                                                     <?= in_array($group->name, $roles) ? 'checked' : '' ?>>
                                                 <label for="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
                                                     class="custom-control-label">&nbsp;</label>
+                                                <?php else : ?>
+                                                <input type="checkbox" data-checkboxes="mygroup"
+                                                    data-role="<?= $group->id ?>" data-user="<?= $user->userId ?>"
+                                                    class="custom-control-input <?= $user->userId ?>"
+                                                    name="<?= $group->name ?>"
+                                                    id="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
+                                                    value="<?= $group->id ?>"
+                                                    <?= in_array($group->name, $roles) ? 'checked' : '' ?> disabled>
+                                                <label for="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
+                                                    class="custom-control-label">&nbsp;</label>
+                                                <?php endif ?>
                                             </div>
                                         </td>
                                         <?php endforeach ?>
                                         <td class="text-center">
+                                            <?php if(has_permission('delete-user')) : ?>
                                             <form method="post" action="<?= base_url('admin/user/'. $user->userId) ?>"
                                                 class="d-inline">
                                                 <?= csrf_field()?>
@@ -77,6 +90,15 @@
                                                 <button class="btn btn-sm btn-danger"><i
                                                         class="fas fa-trash-alt"></i></button>
                                             </form>
+                                            <?php else : ?>
+                                            <form method="post" action="<?= base_url('admin/user/'. $user->userId) ?>"
+                                                class="d-inline">
+                                                <?= csrf_field()?>
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button class="btn btn-sm btn-danger" disabled><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                            <?php endif ?>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -152,6 +174,7 @@
                         message: data,
                         position: 'bottomRight'
                     });
+
                 }
             });
         });

@@ -3,9 +3,18 @@
 <?= $this->section('main') ?>
 <section class="section">
     <div class="section-header">
-        <h1><?= $title ?> <a href="<?= base_url('admin/role/new') ?>" class="btn btn-primary mb-2"><i
-                    class="fas fa-plus-circle"></i> Create
-            </a></h1>
+        <h1><?= $title ?>
+            <?php if(has_permission('create-role')) : ?>
+            <a href="<?= base_url('admin/role/new') ?>" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i>
+                Create
+            </a>
+            <?php else : ?>
+            <a href="<?= base_url('admin/role/new') ?>" class="btn btn-primary mb-2" style="pointer-events: none;"><i
+                    class="fas fa-plus-circle"></i>
+                Create
+            </a>
+            <?php endif ?>
+        </h1>
 
         <div class="section-header-breadcrumb">
             <?php foreach($breadcrumbs as $value => $url) : ?>
@@ -36,14 +45,30 @@
                                 <td><?= $role->name ?></td>
                                 <td><?= $role->description ?></td>
                                 <td class="align-middle text-center p-2">
+                                    <?php if(has_permission('edit-role')) : ?>
                                     <a href="<?= base_url('admin/role/'.$role->id) ?>" class="btn btn-sm btn-warning"><i
                                             class="fas fa-pencil-alt"></i></a>
+                                    <?php else : ?>
+                                    <a href="<?= base_url('admin/role/'.$role->id) ?>" class="btn btn-sm btn-warning"
+                                        style="pointer-events: none;"><i class="fas fa-pencil-alt"></i></a>
+                                    <?php endif; ?>
+
+                                    <?php if(has_permission('delete-role')) : ?>
                                     <form method="post" action="<?= base_url('admin/role/'. $role->id) ?>"
                                         class="d-inline">
                                         <?= csrf_field()?>
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </form>
+                                    <?php else : ?>
+                                    <form method="post" action="<?= base_url('admin/role/'. $role->id) ?>"
+                                        class="d-inline">
+                                        <?= csrf_field()?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-sm btn-danger" disabled><i
+                                                class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                    <?php endif ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

@@ -1,3 +1,7 @@
+<?php 
+ $request = \Config\Services::request();
+?>
+
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -8,20 +12,21 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="active"><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
+            <li class=""><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Layout</span></a>
+                    <span>Treatment</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                    <li><a class="nav-link" href="layout-default.html">Category</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Treatment</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Discount</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Schedule</a></li>
                 </ul>
             </li>
-            <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
-                    <span>Blank Page</span></a></li>
+            <li class=""><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
+                    <span>User Reservasi</span></a></li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                     <span>Bootstrap</span></a>
@@ -50,18 +55,24 @@
             </li>
 
             <li class="menu-header">Manage</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'admin' ? 'active' : '' ?>">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Manage User</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?= base_url('admin/user') ?>">User</a></li>
-                    <?php if (has_permission('manage role')) : ?>
-                    <li><a href="<?= base_url('admin/role') ?>">Role</a></li>
+                    <?php if (has_permission('read-user')) : ?>
+                    <li class="<?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/user') ?>">User</a></li>
                     <?php endif; ?>
-                    <?php if (has_permission('manage permission')) : ?>
-                    <li><a href="<?= base_url('admin/permission') ?>">Permission</a></li>
+                    <?php if (has_permission('read-role')) : ?>
+                    <li class="<?= $request->uri->getSegment(2) == 'role' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/role') ?>">Role</a></li>
                     <?php endif; ?>
-                    <?php if (has_permission('manage role permission')) : ?>
-                    <li><a href="<?= base_url('admin/rolehaspermission') ?>">Role has permission</a></li>
+                    <?php if (has_permission('read-permission')) : ?>
+                    <li class="<?= $request->uri->getSegment(2) == 'permission' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/permission') ?>">Permission</a></li>
+                    <?php endif; ?>
+                    <?php if (has_permission('read-haspermission')) : ?>
+                    <li class="<?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/rolehaspermission') ?>">Role has permission</a></li>
                     <?php endif; ?>
                 </ul>
             </li>

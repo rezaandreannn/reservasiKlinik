@@ -18,33 +18,38 @@
         <div class="col-12 col-md-10 col-lg-8">
 
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-md">
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th class="align-middle text-center p-2">Permission</th>
-                            </tr>
-                            <?php $no = 1; ?>
-                            <?php foreach($permissions as $permission) : ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $permission->name ?></td>
-                                <td><?= $permission->description ?></td>
-                                <td class="align-middle text-center p-2">
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                            data-role="<?= $role->id ?>" data-permission="<?= $permission->id ?>"
-                                            id="checkbox-<?= $permission->id ?>"
-                                            <?= groups_has_permission($role->id , $permission->id) ? 'checked' : '' ?>>
-                                        <label for="checkbox-<?= $permission->id ?>"
-                                            class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
+                        <table class="table table-striped" id="table-1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th class="align-middle text-center p-2">Permission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1; ?>
+                                <?php foreach($permissions as $permission) : ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $permission->name ?></td>
+                                    <td><?= $permission->description ?></td>
+                                    <td class="align-middle text-center p-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup"
+                                                class="custom-control-input" data-role="<?= $role->id ?>"
+                                                data-permission="<?= $permission->id ?>"
+                                                id="checkbox-<?= $permission->id ?>"
+                                                <?= groups_has_permission($role->id , $permission->id) ? 'checked' : '' ?>>
+                                            <label for="checkbox-<?= $permission->id ?>"
+                                                class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -58,15 +63,23 @@
 <!-- CSS Libraries -->
 <?= $this->section('cssLibrary') ?>
 <link rel="stylesheet" href="<?= base_url('stisla/node_modules/izitoast/dist/css/iziToast.min.css') ?>">
+<link rel="stylesheet"
+    href="<?= base_url('stisla/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') ?>">
+<link rel="stylesheet"
+    href="<?= base_url('stisla/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
 <?= $this->endSection() ?>
 
 <!-- JS Libraies -->
 <?= $this->section('jsLibrary') ?>
 <script src="<?= base_url('stisla/node_modules/izitoast/dist/js/iziToast.min.js') ?>"></script>
+<script src="<?= base_url('stisla/node_modules/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= base_url('stisla/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('stisla/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') ?>"></script>
 <?= $this->endSection() ?>
 
 <!-- Page Specific JS File -->
 <?= $this->section('jsSpesific') ?>
+<script src="<?= base_url('stisla/assets/js/page/modules-datatables.js') ?>"></script>
 
 <!-- flashdata message data -->
 <?php if (session()->getFlashdata('message')) : ?>
@@ -109,6 +122,7 @@
                         message: data,
                         position: 'bottomRight'
                     });
+
                 }
             });
         })
