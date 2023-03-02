@@ -60,7 +60,7 @@
             <?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>
-            <?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'perizinan-grup' ? 'active' : '' ?>
             ">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Kelola Pengguna</span></a>
                 <ul class="dropdown-menu">
@@ -77,8 +77,8 @@
                             href="<?= base_url('admin/perizinan') ?>">Perizinan</a></li>
 
 
-                    <li class="<?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/rolehaspermission') ?>">Role has permission</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'perizinan-grup' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/perizinan-grup') ?>">Perizinan grup</a></li>
 
                 </ul>
             </li>

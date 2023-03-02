@@ -19,7 +19,7 @@ class RoleHasPermission extends BaseController
     {
 
         $data = [
-            'title' => 'Manage Role Permission',
+            'title' => 'Kelola Perizinan Grup',
             'breadcrumbs' => [
                 'Dashboard' => '',
             ],
@@ -30,12 +30,16 @@ class RoleHasPermission extends BaseController
     }
 
     public function show($id = null){
+
+        $role = $this->role->find($id);
+
         $data = [
-            'title' => 'Detail Role Permission',
+            'title' => 'Detail Perizinan Grup ' . ': ' . ucfirst($role->name),
             'breadcrumbs' => [
                 'Dashboard' => '',
+                'Perizinan Grup' => base_url('admin/perizinan-grup')
             ],
-            'role' => $this->role->find($id),
+            'role' => $role,
             'permissions' => $this->permission->findAll()
         ];
 
@@ -50,10 +54,10 @@ class RoleHasPermission extends BaseController
         // Use a single group id
         if($action == 'insert'){
             $this->role->addPermissionToGroup(intval($permissionId), intval($roleId));
-            $message = 'add permission to role succesfully';
+            $message = 'Menambahkan perizinan baru';
         }else{
             $this->role->removePermissionFromGroup(intval($permissionId), intval($roleId));
-            $message = 'remove permission from role succesfully';
+            $message = 'Menghapus perizinan';
         }
         return json_encode($message);
     }

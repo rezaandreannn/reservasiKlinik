@@ -9,7 +9,7 @@
             <?php foreach($breadcrumbs as $value => $url) : ?>
             <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Table</div>
+            <div class="breadcrumb-item">Data Grup</div>
         </div>
     </div>
 
@@ -23,9 +23,9 @@
                         <table class="table table-striped table-md">
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th class="align-middle text-center p-2">Action</th>
+                                <th>Nama Grup</th>
+                                <th>Deskripsi</th>
+                                <th class="align-middle text-center p-2">Aksi</th>
                             </tr>
                             <?php $no = 1; ?>
                             <?php foreach($roles as $role) : ?>
@@ -34,14 +34,10 @@
                                 <td><?= $role->name ?></td>
                                 <td><?= $role->description ?></td>
                                 <td class="align-middle text-center p-2">
-                                    <?php if(has_permission('read-haspermission')) : ?>
-                                    <a href="<?= base_url('admin/rolehaspermission/'.$role->id) ?>"
-                                        class="btn btn-sm btn-warning"><i class="fas fa-user-lock"></i> Permission</a>
-                                    <?php else : ?>
-                                    <a href="<?= base_url('admin/rolehaspermission/'.$role->id) ?>"
-                                        class="btn btn-sm btn-warning" style="pointer-events: none;"><i
-                                            class="fas fa-user-lock"></i> Permission</a>
-                                    <?php endif ?>
+
+                                    <a href="<?= base_url('admin/perizinan-grup/'.$role->id) ?>"
+                                        class="btn btn-sm btn-warning"><i class="fas fa-user-lock"></i> Perizinan</a>
+
                                 </td>
                             </tr>
                             <?php endforeach; ?>

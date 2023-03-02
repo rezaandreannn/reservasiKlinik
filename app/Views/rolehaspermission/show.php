@@ -7,26 +7,26 @@
 
         <div class="section-header-breadcrumb">
             <?php foreach($breadcrumbs as $value => $url) : ?>
-            <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
+            <div class="breadcrumb-item active"><a href="<?= $url ?? '' ?>"><?= $value ?? '' ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Table</div>
+            <div class="breadcrumb-item">Data Perizinan</div>
         </div>
     </div>
 
 
     <div class="section-body">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-10 col-lg-12">
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped" id="table-1">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th class="align-middle text-center p-2">Permission</th>
+                                    <th>Nama Perizinan</th>
+                                    <th>Deskripsi</th>
+                                    <th class="align-middle text-center p-2">Perizinan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,18 +63,18 @@
 <!-- CSS Libraries -->
 <?= $this->section('cssLibrary') ?>
 <link rel="stylesheet" href="<?= base_url('stisla/node_modules/izitoast/dist/css/iziToast.min.css') ?>">
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
     href="<?= base_url('stisla/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') ?>">
 <link rel="stylesheet"
-    href="<?= base_url('stisla/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
+    href="<?= base_url('stisla/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>"> -->
 <?= $this->endSection() ?>
 
 <!-- JS Libraies -->
 <?= $this->section('jsLibrary') ?>
 <script src="<?= base_url('stisla/node_modules/izitoast/dist/js/iziToast.min.js') ?>"></script>
-<script src="<?= base_url('stisla/node_modules/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
+<!-- <script src="<?= base_url('stisla/node_modules/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('stisla/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-<script src="<?= base_url('stisla/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('stisla/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') ?>"></script> -->
 <?= $this->endSection() ?>
 
 <!-- Page Specific JS File -->
@@ -87,7 +87,7 @@
 <?php $message = session()->getFlashdata('message'); ?>
 <script>
     iziToast.success({
-        title: 'Success!',
+        title: 'Sukses!',
         message: '<?= $message ?>',
         position: 'bottomRight'
     });
@@ -108,8 +108,6 @@
                 action = "delete"
             }
 
-            // console.log(permissionId)
-            console.log('ok')
 
             $.ajax({
                 url: "<?= base_url('admin/changepermission') ?>",
@@ -121,7 +119,7 @@
                 },
                 success: function (data) {
                     iziToast.success({
-                        title: 'Success!',
+                        title: 'Sukses!',
                         message: data,
                         position: 'bottomRight'
                     });

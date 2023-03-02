@@ -72,8 +72,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->delete('perizinan/(:num)', 'Permission::delete/$1');
 
     // routes role has permission
-    $routes->get('rolehaspermission', 'RoleHasPermission::index');
-    $routes->get('rolehaspermission/(:num)', 'RoleHasPermission::show/$1');
+    $routes->get('perizinan-grup', 'RoleHasPermission::index');
+    $routes->get('perizinan-grup/(:num)', 'RoleHasPermission::show/$1');
     $routes->post('changepermission', 'RoleHasPermission::changePermission');
 
 });
