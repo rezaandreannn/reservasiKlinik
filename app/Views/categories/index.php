@@ -3,7 +3,17 @@
 <?= $this->section('main') ?>
 <section class="section">
     <div class="section-header">
-        <h1><?= $title ?></h1>
+        <h1><?= $title ?>
+            <?php if(has_permission('create-category')) : ?>
+            <a href="<?= base_url('admin/category/new') ?>" class="btn btn-primary mb-2"><i
+                    class="fas fa-plus-circle"></i> Create
+            </a>
+            <?php else : ?>
+            <a href="<?= base_url('admin/category/new') ?>" class="btn btn-primary mb-2"
+                style="pointer-events: none;"><i class="fas fa-plus-circle"></i> Create
+            </a>
+            <?php endif ?>
+        </h1>
 
         <div class="section-header-breadcrumb">
             <?php foreach($breadcrumbs as $value => $url) : ?>
@@ -26,26 +36,42 @@
                                     <th>No</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th class="align-middle text-center p-2">Permission</th>
+                                    <th class="align-middle text-center p-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
-                                <?php foreach($permissions as $permission) : ?>
+                                <?php foreach($categories as $category) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $permission->name ?></td>
-                                    <td><?= $permission->description ?></td>
+                                    <td><?= $category->name ?></td>
+                                    <td><?= $category->description ?></td>
                                     <td class="align-middle text-center p-2">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup"
-                                                class="custom-control-input" data-role="<?= $role->id ?>"
-                                                data-permission="<?= $permission->id ?>"
-                                                id="checkbox-<?= $permission->id ?>"
-                                                <?= groups_has_permission($role->id , $permission->id) ? 'checked' : '' ?>>
-                                            <label for="checkbox-<?= $permission->id ?>"
-                                                class="custom-control-label">&nbsp;</label>
-                                        </div>
+                                        <?php if(has_permission('edit-category')) : ?>
+                                        <a href="<?= base_url('admin/permission/'.$category->id) ?>"
+                                            class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        <?php else : ?>
+                                        <a href="<?= base_url('admin/permission/'.$category->id) ?>"
+                                            class="btn btn-sm btn-warning" style="pointer-events: none;"><i
+                                                class="fas fa-pencil-alt"></i></a>
+                                        <?php endif; ?>
+                                        <?php if(has_permission('delete-category')): ?>
+                                        <form method="post" action="<?= base_url('admin/permission/'. $category->id) ?>"
+                                            class="d-inline">
+                                            <?= csrf_field()?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-sm btn-danger"><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                        <?php else: ?>
+                                        <form method="post" action="<?= base_url('admin/permission/'. $category->id) ?>"
+                                            class="d-inline">
+                                            <?= csrf_field()?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-sm btn-danger" disabled><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                        <?php endif ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -79,8 +105,7 @@
 
 <!-- Page Specific JS File -->
 <?= $this->section('jsSpesific') ?>
-<!-- <script src="<?= base_url('stisla/assets/js/page/modules-datatables.js') ?>"></script> -->
-
+<script src="<?= base_url('stisla/assets/js/page/modules-datatables.js') ?>"></script>
 
 <!-- flashdata message data -->
 <?php if (session()->getFlashdata('message')) : ?>
@@ -93,57 +118,6 @@
     });
 </script>
 <?php endif; ?>
-
-<script>
-    $(document).ready(function () {
-        $(".custom-control-input").click(function () {
-            var roleId = $(this).data('role');
-            var permissionId = $(this).data('permission');
-            var status = $(this).is(':checked');
-            var action = ""
-
-            if (status) {
-                action = "insert"
-            } else {
-                action = "delete"
-            }
-
-            // console.log(permissionId)
-            console.log('ok')
-
-            $.ajax({
-                url: "<?= base_url('admin/changepermission') ?>",
-                type: "POST",
-                data: {
-                    permissionId: permissionId,
-                    roleId: roleId,
-                    action: action
-                },
-                success: function (data) {
-                    iziToast.success({
-                        title: 'Success!',
-                        message: data,
-                        position: 'bottomRight'
-                    });
-                }
-            });
-        });
-    });
-</script>
-
-<!-- <script>
-    $(document).ready(function () {
-        $("[data-checkboxes]").each(function (index) {
-            var input = $(this);
-            var permissionId = input.attr("data-permission");
-            var checkboxId = "checkbox-" + permissionId;
-
-
-
-            console.log(checkboxId)
-        });
-    })
-</script> -->
 
 
 <?= $this->endSection() ?>

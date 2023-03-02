@@ -15,11 +15,12 @@
             <li class=""><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Treatment</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">Category</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>"><a class="nav-link"
+                            href="<?= base_url('admin/category') ?>">Category</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Treatment</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Discount</a></li>
                     <li><a class="nav-link" href="layout-top-navigation.html">Schedule</a></li>
@@ -54,21 +55,26 @@
                 </ul>
             </li>
 
-            <li class="menu-header">Manage</li>
-            <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'admin' ? 'active' : '' ?>">
-                <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Manage User</span></a>
+            <li class="menu-header">Kelola</li>
+            <li class="nav-item dropdown 
+            <?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'permission' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>
+            ">
+                <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Kelola Pengguna</span></a>
                 <ul class="dropdown-menu">
                     <?php if (has_permission('read-user')) : ?>
                     <li class="<?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/user') ?>">User</a></li>
+                            href="<?= base_url('admin/user') ?>">Pengguna</a></li>
                     <?php endif; ?>
                     <?php if (has_permission('read-role')) : ?>
-                    <li class="<?= $request->uri->getSegment(2) == 'role' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/role') ?>">Role</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/grup') ?>">Grup</a></li>
                     <?php endif; ?>
                     <?php if (has_permission('read-permission')) : ?>
                     <li class="<?= $request->uri->getSegment(2) == 'permission' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/permission') ?>">Permission</a></li>
+                            href="<?= base_url('admin/permission') ?>">Perizinan</a></li>
                     <?php endif; ?>
                     <?php if (has_permission('read-haspermission')) : ?>
                     <li class="<?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>"><a

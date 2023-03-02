@@ -5,6 +5,7 @@ namespace Config;
 use App\Controllers\Role;
 use App\Controllers\User;
 use App\Controllers\Dashboard;
+use App\Controllers\Categories;
 use App\Controllers\Permission;
 use App\Controllers\RoleHasPermission;
 
@@ -42,18 +43,25 @@ $routes->get('/dashboard', 'Dashboard::index');
 
 
 $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
+    // routes manage categories
+    $routes->get('category', 'Categories::index');
+    $routes->get('category/new', 'Categories::new');
+
+
+
+
     // routes manage user
     $routes->get('user', 'User::index');
     $routes->post('manage_role', 'User::manageRole');
     $routes->delete('user/(:num)', 'User::delete/$1');
   
     // routes manage role
-    $routes->get('role', 'Role::index');
-    $routes->get('role/new', 'Role::new');
-    $routes->post('role', 'Role::create');
-    $routes->get('role/(:num)', 'Role::edit/$1');
-    $routes->put('role/(:num)', 'Role::update/$1');
-    $routes->delete('role/(:num)', 'Role::delete/$1');
+    $routes->get('grup', 'Role::index');
+    $routes->get('grup/baru', 'Role::new');
+    $routes->post('grup', 'Role::create');
+    $routes->get('grup/(:num)', 'Role::edit/$1');
+    $routes->put('grup/(:num)', 'Role::update/$1');
+    $routes->delete('grup/(:num)', 'Role::delete/$1');
 
     // routes manage permission
     $routes->get('permission', 'Permission::index');

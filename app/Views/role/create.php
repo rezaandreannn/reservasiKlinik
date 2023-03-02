@@ -17,7 +17,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= base_url('admin/role'); ?>" method="post" autocomplete="off">
+                        <form action="<?= base_url('admin/grup'); ?>" method="post" autocomplete="off">
                             <?= csrf_field() ?>
                             <div class="row">
                                 <div class="col-lg-12 col-md-8 col-sm-12">
@@ -25,28 +25,33 @@
                                         <!-- input role name -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">
-                                                <label class="mb-1">Role Name<span class="text-danger">*</span></label>
+                                                <label class="mb-1">Nama Grup<span class="text-danger">*</span></label>
                                                 <input
-                                                    class="form-control <?= $validation->hasError('name') ? 'is-invalid' : null ?>"
+                                                    class="form-control <?= session('errors.name') ? 'is-invalid' : '' ?>"
                                                     type="text" name="name" value="<?= old('name') ?>">
                                                 <div class="invalid-feedback">
-                                                    <?= $validation->getError('name'); ?>
+                                                    <?= session('errors.name') ?>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- input role description -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">
-                                                <label class="mb-1">Description</label>
-                                                <textarea name="description" class="form-control " id="description"
-                                                    cols="30" rows="10"></textarea>
+                                                <label class="mb-1">Deskripsi</label>
+                                                <textarea name="description"
+                                                    class="form-control <?= session('errors.description') ? 'is-invalid' : '' ?>"
+                                                    id="description" cols="30"
+                                                    rows="10"><?= old('description') ?></textarea>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.description') ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
                         </form>
                     </div>

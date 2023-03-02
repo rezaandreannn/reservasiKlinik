@@ -34,7 +34,7 @@
                                 <td><?= $role->name ?></td>
                                 <td><?= $role->description ?></td>
                                 <td class="align-middle text-center p-2">
-                                    <?php if(has_permission('show-rolehaspermission')) : ?>
+                                    <?php if(has_permission('read-haspermission')) : ?>
                                     <a href="<?= base_url('admin/rolehaspermission/'.$role->id) ?>"
                                         class="btn btn-sm btn-warning"><i class="fas fa-user-lock"></i> Permission</a>
                                     <?php else : ?>
