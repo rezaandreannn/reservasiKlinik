@@ -15,7 +15,9 @@
 
 
     <div class="section-body">
+
         <div class="col-12 col-md-10 col-lg-8">
+            <p class="section-title">Menampilkan semua data grup</p>
 
             <div class="card">
                 <div class="card-body p-0">

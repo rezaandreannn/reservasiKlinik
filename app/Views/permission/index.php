@@ -15,7 +15,7 @@
             <?php foreach($breadcrumbs as $value => $url) : ?>
             <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Table</div>
+            <div class="breadcrumb-item">Data Perizinan</div>
         </div>
     </div>
 

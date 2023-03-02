@@ -15,13 +15,14 @@
             <?php foreach($breadcrumbs as $value => $url) : ?>
             <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Table</div>
+            <div class="breadcrumb-item">Data Grup</div>
         </div>
     </div>
 
 
     <div class="section-body">
         <div class="col-12 col-md-10 col-lg-8">
+            <p class="section-title">Menampilkan semua data grup</p>
 
             <div class="card">
                 <div class="card-body p-0">

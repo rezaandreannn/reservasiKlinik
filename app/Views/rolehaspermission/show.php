@@ -16,6 +16,7 @@
 
     <div class="section-body">
         <div class="col-12 col-md-10 col-lg-12">
+            <p class="section-title">Menampilkan semua data perizinan</p>
 
             <div class="card">
                 <div class="card-body p-0">
