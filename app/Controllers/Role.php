@@ -34,7 +34,7 @@ class Role extends BaseController
             'title' => 'Tambah Grup',
             'breadcrumbs' => [
                 'Dashboard' => '',
-                'Role' => ''
+                'Grup' => base_url('admin/grup')
             ],
            
            
@@ -74,16 +74,14 @@ class Role extends BaseController
     }
 
     public function edit($id = null){
-        session();
+       
         $data = [
             'title' => 'Ubah Grup',
             'breadcrumbs' => [
                 'Dashboard' => '',
-                'Role' => ''
+              'Grup' => base_url('admin/grup')
             ],
             'role' => $this->role->find($id),
-            'validation' => \Config\Services::validation() // untuk mencetak validasi di view
-           
         ];
 
         return view('role/edit', $data);

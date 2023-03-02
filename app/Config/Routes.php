@@ -64,12 +64,12 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->delete('grup/(:num)', 'Role::delete/$1');
 
     // routes manage permission
-    $routes->get('permission', 'Permission::index');
-    $routes->get('permission/new', 'Permission::new');
-    $routes->post('permission', 'Permission::create');
-    $routes->get('permission/(:num)', 'Permission::edit/$1');
-    $routes->put('permission/(:num)', 'Permission::update/$1');
-    $routes->delete('permission/(:num)', 'Permission::delete/$1');
+    $routes->get('perizinan', 'Permission::index');
+    $routes->get('perizinan/baru', 'Permission::new');
+    $routes->post('perizinan', 'Permission::create');
+    $routes->get('perizinan/(:num)', 'Permission::edit/$1');
+    $routes->put('perizinan/(:num)', 'Permission::update/$1');
+    $routes->delete('perizinan/(:num)', 'Permission::delete/$1');
 
     // routes role has permission
     $routes->get('rolehaspermission', 'RoleHasPermission::index');

@@ -59,27 +59,27 @@
             <li class="nav-item dropdown 
             <?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>
-            <?= $request->uri->getSegment(2) == 'permission' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>
             ">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Kelola Pengguna</span></a>
                 <ul class="dropdown-menu">
-                    <?php if (has_permission('read-user')) : ?>
+
                     <li class="<?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>"><a
                             href="<?= base_url('admin/user') ?>">Pengguna</a></li>
-                    <?php endif; ?>
-                    <?php if (has_permission('read-role')) : ?>
+
+
                     <li class="<?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>"><a
                             href="<?= base_url('admin/grup') ?>">Grup</a></li>
-                    <?php endif; ?>
-                    <?php if (has_permission('read-permission')) : ?>
-                    <li class="<?= $request->uri->getSegment(2) == 'permission' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/permission') ?>">Perizinan</a></li>
-                    <?php endif; ?>
-                    <?php if (has_permission('read-haspermission')) : ?>
+
+
+                    <li class="<?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/perizinan') ?>">Perizinan</a></li>
+
+
                     <li class="<?= $request->uri->getSegment(2) == 'rolehaspermission' ? 'active' : '' ?>"><a
                             href="<?= base_url('admin/rolehaspermission') ?>">Role has permission</a></li>
-                    <?php endif; ?>
+
                 </ul>
             </li>
         </ul>

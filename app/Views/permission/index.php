@@ -4,15 +4,11 @@
 <section class="section">
     <div class="section-header">
         <h1><?= $title ?>
-            <?php if(has_permission('create-permission')) : ?>
-            <a href="<?= base_url('admin/permission/new') ?>" class="btn btn-primary mb-2"><i
-                    class="fas fa-plus-circle"></i> Create
+
+            <a href="<?= base_url('admin/perizinan/baru') ?>" class="btn btn-primary mb-2"><i
+                    class="fas fa-plus-circle"></i> Tambah
             </a>
-            <?php else : ?>
-            <a href="<?= base_url('admin/permission/new') ?>" class="btn btn-primary mb-2"
-                style="pointer-events: none;"><i class="fas fa-plus-circle"></i> Create
-            </a>
-            <?php endif ?>
+
         </h1>
 
         <div class="section-header-breadcrumb">
@@ -25,7 +21,7 @@
 
 
     <div class="section-body">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-10 col-lg-10">
 
             <div class="card">
                 <div class="card-body">
@@ -34,9 +30,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th class="align-middle text-center p-2">Action</th>
+                                    <th>Nama Perizinan</th>
+                                    <th>Deskripsi</th>
+                                    <th class="align-middle text-center p-2">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,33 +43,20 @@
                                     <td><?= $permission->name ?></td>
                                     <td><?= $permission->description ?></td>
                                     <td class="align-middle text-center p-2">
-                                        <?php if(has_permission('edit-permission')) : ?>
-                                        <a href="<?= base_url('admin/permission/'.$permission->id) ?>"
+
+                                        <a href="<?= base_url('admin/perizinan/'.$permission->id) ?>"
                                             class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                        <?php else : ?>
-                                        <a href="<?= base_url('admin/permission/'.$permission->id) ?>"
-                                            class="btn btn-sm btn-warning" style="pointer-events: none;"><i
-                                                class="fas fa-pencil-alt"></i></a>
-                                        <?php endif; ?>
-                                        <?php if(has_permission('delete-permission')): ?>
+
+
                                         <form method="post"
-                                            action="<?= base_url('admin/permission/'. $permission->id) ?>"
+                                            action="<?= base_url('admin/perizinan/'. $permission->id) ?>"
                                             class="d-inline">
                                             <?= csrf_field()?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-sm btn-danger"><i
                                                     class="fas fa-trash-alt"></i></button>
                                         </form>
-                                        <?php else: ?>
-                                        <form method="post"
-                                            action="<?= base_url('admin/permission/'. $permission->id) ?>"
-                                            class="d-inline">
-                                            <?= csrf_field()?>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-sm btn-danger" disabled><i
-                                                    class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                        <?php endif ?>
+
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

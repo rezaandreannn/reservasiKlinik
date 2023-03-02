@@ -17,7 +17,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= base_url('admin/permission/'. $permission->id); ?>" method="post"
+                        <form action="<?= base_url('admin/perizinan/'. $permission->id); ?>" method="post"
                             autocomplete="off">
                             <input type="hidden" name="_method" value="put">
                             <?= csrf_field() ?>
@@ -27,31 +27,36 @@
                                         <!-- input permission name -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">
-                                                <label class="mb-1">Permission Name<span
+                                                <label class="mb-1">Nama Perizinan<span
                                                         class="text-danger">*</span></label>
                                                 <input
-                                                    class="form-control <?= $validation->hasError('name') ? 'is-invalid' : null ?>"
+                                                    class="form-control <?= session('errors.name') ? 'is-invalid' : '' ?>"
                                                     type="text" name="name"
                                                     value="<?= old('name', $permission->name) ?>">
                                                 <div class="invalid-feedback">
-                                                    <?= $validation->getError('name'); ?>
+                                                    <?= session('errors.name') ?>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- input permission description -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">
-                                                <label class="mb-1">Description</label>
-                                                <textarea name="description" class="form-control " id="description"
-                                                    cols="30"
+                                                <label class="mb-1">Description<span
+                                                        class="text-danger">*</span></label>
+                                                <textarea name="description"
+                                                    class="form-control <?= session('errors.description') ? 'is-invalid' : '' ?>"
+                                                    id="description" cols="30"
                                                     rows="10"><?= old('description', $permission->description) ?></textarea>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.description') ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
                         </form>
                     </div>
