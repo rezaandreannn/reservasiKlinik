@@ -13,7 +13,9 @@
                         <h4><?=lang('Auth.loginAction')?></h4>
                     </div>
 
+
                     <div class="card-body">
+                        <?= view('Myth\Auth\Views\_message_block') ?>
                         <form action="<?= url_to('login') ?>" method="post" novalidate="">
                             <?= csrf_field() ?>
                             <!-- <form method="POST" action="#" class="needs-validation" novalidate=""> -->

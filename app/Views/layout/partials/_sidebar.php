@@ -32,7 +32,7 @@
 
             <li class="menu-header">Kelola</li>
             <li class="nav-item dropdown 
-            <?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>
+            <?= $request->uri->getSegment(2) == 'pengguna' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>
             <?= $request->uri->getSegment(2) == 'perizinan-grup' ? 'active' : '' ?>
@@ -40,8 +40,8 @@
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Kelola Pengguna</span></a>
                 <ul class="dropdown-menu">
 
-                    <li class="<?= $request->uri->getSegment(2) == 'user' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/user') ?>">Pengguna</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'pengguna' ? 'active' : '' ?>"><a
+                            href="<?= base_url('admin/pengguna') ?>">Pengguna</a></li>
 
 
                     <li class="<?= $request->uri->getSegment(2) == 'grup' ? 'active' : '' ?>"><a

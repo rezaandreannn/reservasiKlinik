@@ -12,7 +12,7 @@
             <?php foreach($breadcrumbs as $value => $url) : ?>
             <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Table</div>
+            <div class="breadcrumb-item">Data Pengguna</div>
         </div>
     </div>
 
@@ -26,64 +26,50 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
-                                        <th class="text-center align-middle" rowspan="2">
+                                        <th class="align-middle">
                                             No
                                         </th>
-                                        <th rowspan="2" class="align-middle">Email</th>
-                                        <th rowspan="2" class="align-middle">Username</th>
-                                        <th colspan="<?= $sumGroup ?>" class="text-center">Role</th>
-                                        <th rowspan="2" class="align-middle text-center">Action</th>
-                                    </tr>
-                                    <tr>
-                                        <?php foreach($groups as $group) : ?>
-                                        <th class="text-center"><?= $group->name ?> </th>
-                                        <?php endforeach ?>
+                                        <th class="align-middle">Email</th>
+                                        <th class="align-middle">Nama Pengguna</th>
+                                        <th class="">No Telp</th>
+                                        <th class="">Status</th>
+                                        <th class="align-middle text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1 ; ?>
                                     <?php foreach($users as $user) : ?>
-                                    <tr d>
-                                        <td class="text-center">
+                                    <tr>
+                                        <td class="">
                                             <?= $no++ ?>
                                         </td>
                                         <td><?= $user->email ?></td>
                                         <td>
                                             <?= $user->username ?>
                                         </td>
-                                        <?php
-                                        $roles = explode(', ', $user->name);
-                                        ?>
-                                        <?php foreach($groups as $group) : ?>
-                                        <td class="text-center" id="user<?= $user->userId ?>">
-                                            <div class="custom-checkbox custom-control">
-                                                <?php if(has_permission('edit-user')) : ?>
-                                                <input type="checkbox" data-checkboxes="mygroup"
-                                                    data-role="<?= $group->id ?>" data-user="<?= $user->userId ?>"
-                                                    class="custom-control-input <?= $user->userId ?>"
-                                                    name="<?= $group->name ?>"
-                                                    id="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
-                                                    value="<?= $group->id ?>"
-                                                    <?= in_array($group->name, $roles) ? 'checked' : '' ?>>
-                                                <label for="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
-                                                    class="custom-control-label">&nbsp;</label>
-                                                <?php else : ?>
-                                                <input type="checkbox" data-checkboxes="mygroup"
-                                                    data-role="<?= $group->id ?>" data-user="<?= $user->userId ?>"
-                                                    class="custom-control-input <?= $user->userId ?>"
-                                                    name="<?= $group->name ?>"
-                                                    id="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
-                                                    value="<?= $group->id ?>"
-                                                    <?= in_array($group->name, $roles) ? 'checked' : '' ?> disabled>
-                                                <label for="checkbox-<?= $group->id ?>-<?= $user->userId ?>"
-                                                    class="custom-control-label">&nbsp;</label>
-                                                <?php endif ?>
-                                            </div>
+                                        <td>
+                                            <?= $user->no_telp ?>
                                         </td>
-                                        <?php endforeach ?>
+                                        <td>
+                                            <?php if ($user->deleted_at == null) : ?>
+                                            <div class="badge badge-success">
+                                                Aktif
+                                            </div>
+                                            <?php else : ?>
+                                            <div class="badge badge-danger">
+                                                Tidak aktif
+                                            </div>
+                                            <?php endif; ?>
+
+                                        </td>
+
                                         <td class="text-center">
-                                            <?php if(has_permission('delete-user')) : ?>
-                                            <form method="post" action="<?= base_url('admin/user/'. $user->userId) ?>"
+                                            <?php if ($user->deleted_at == null) : ?>
+                                            <a href="<?= base_url('admin/pengguna/show/'. $user->id) ?>"
+                                                class="btn btn-sm btn-info"><i class="fas fa-info-circle"></i></a>
+                                            <a href="<?= base_url('admin/pengguna/edit/'. $user->id) ?>"
+                                                class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                            <form method="post" action="<?= base_url('admin/pengguna/'. $user->id) ?>"
                                                 class="d-inline">
                                                 <?= csrf_field()?>
                                                 <input type="hidden" name="_method" value="DELETE">
@@ -91,14 +77,17 @@
                                                         class="fas fa-trash-alt"></i></button>
                                             </form>
                                             <?php else : ?>
-                                            <form method="post" action="<?= base_url('admin/user/'. $user->userId) ?>"
-                                                class="d-inline">
+                                            <a href="<?= base_url('admin/pengguna/restore/'. $user->id) ?>"
+                                                class="btn btn-sm btn-success"><i class="fas fa-trash-restore"></i></a>
+                                            <form method="post"
+                                                action="<?= base_url('admin/pengguna/force/'. $user->id) ?>"
+                                                class="d-inline delete">
                                                 <?= csrf_field()?>
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-sm btn-danger" disabled><i
+                                                <button class="btn btn-sm btn-danger"><i
                                                         class="fas fa-trash-alt"></i></button>
                                             </form>
-                                            <?php endif ?>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -138,15 +127,48 @@
 <?php if (session()->getFlashdata('message')) : ?>
 <?php $message = session()->getFlashdata('message'); ?>
 <script>
-    iziToast.success({
-        title: 'Success!',
-        message: '<?= $message ?>',
-        position: 'bottomRight'
-    });
+    Swal.fire(
+        'Sukses!',
+        '<?= $message ?>',
+        'success'
+    )
+</script>
+<?php endif; ?>
+
+<!-- flashdata message data -->
+<?php if (session()->getFlashdata('error')) : ?>
+<?php $message = session()->getFlashdata('error'); ?>
+<script>
+    Swal.fire(
+        'Error!',
+        '<?= $message ?>',
+        'error'
+    )
 </script>
 <?php endif; ?>
 
 <script>
+    $(document).ready(function () {
+        $('.delete').submit(function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "data ini akan terhapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+    });
+</script>
+
+<!-- <script>
     $(document).ready(function () {
         $('.custom-control-input').on('change', function () {
             var roleId = $(this).data('role');
@@ -179,7 +201,7 @@
             });
         });
     });
-</script>
+</script> -->
 
 
 

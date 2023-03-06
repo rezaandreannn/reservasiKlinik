@@ -14,6 +14,8 @@
 
     <!-- CSS Libraries -->
     <?= $this->renderSection('cssLibrary') ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css"
+        integrity="sha256-sWZjHQiY9fvheUAOoxrszw9Wphl3zqfVaz1kZKEvot8=" crossorigin="anonymous">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url('stisla/assets/css/style.css') ?>">
@@ -63,6 +65,8 @@
 
     <!-- JS Libraies -->
     <?= $this->renderSection('jsLibrary') ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"
+        integrity="sha256-t0FDfwj/WoMHIBbmFfuOtZv1wtA977QCfsFR3p1K4No=" crossorigin="anonymous"></script>
 
     <!-- Template JS File -->
     <script src="<?= base_url('stisla/assets/js/scripts.js') ?>"></script>

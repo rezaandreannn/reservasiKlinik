@@ -47,13 +47,14 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->get('category', 'Categories::index');
     $routes->get('category/new', 'Categories::new');
 
-
-
-
     // routes manage user
-    $routes->get('user', 'User::index');
+    $routes->get('pengguna', 'User::index');
+    $routes->get('pengguna/restore/(:num)', 'User::restore/$1');
+    $routes->get('pengguna/show/(:num)', 'User::show/$1');
+    $routes->get('pengguna/edit/(:num)', 'User::edit/$1');
     $routes->post('manage_role', 'User::manageRole');
-    $routes->delete('user/(:num)', 'User::delete/$1');
+    $routes->delete('pengguna/(:num)', 'User::delete/$1');
+    $routes->delete('pengguna/force/(:num)', 'User::forceDelete/$1');
   
     // routes manage role
     $routes->get('grup', 'Role::index');

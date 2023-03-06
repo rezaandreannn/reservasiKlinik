@@ -15,4 +15,14 @@ if (! function_exists('groups_has_permission')) {
             ->countAllResults() > 0 ? true : false ;
 
     }
+
+    function users_has_groups($userId, $GroupId): bool
+    {
+       
+        $db = \Config\Database::connect();
+        return $db->table('auth_groups_users')
+            ->where(['group_id' => $GroupId, 'user_id' => $userId])
+            ->countAllResults() > 0 ? true : false ;
+
+    }
 }
