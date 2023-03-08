@@ -15,15 +15,15 @@
             <li class=""><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
-            <li class="nav-item dropdown <?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>">
+            <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Treatment</span></a>
+                    <span>Master Data</span></a>
                 <ul class="dropdown-menu">
-                    <li class="<?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>"><a class="nav-link"
-                            href="<?= base_url('admin/category') ?>">Category</a></li>
+                    <!-- <li class="<?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>"><a class="nav-link"
+                            href="<?= base_url('admin/category') ?>">Category</a></li> -->
                     <li><a class="nav-link" href="layout-transparent.html">Treatment</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Discount</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Schedule</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Bank</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Jadwal</a></li>
                 </ul>
             </li>
             <li class=""><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
