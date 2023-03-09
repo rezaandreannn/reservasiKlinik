@@ -22,7 +22,8 @@
                     <!-- <li class="<?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>"><a class="nav-link"
                             href="<?= base_url('admin/category') ?>">Category</a></li> -->
                     <li><a class="nav-link" href="layout-transparent.html">Treatment</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Bank</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'bank' ? 'active' : '' ?>"><a class="nav-link"
+                            href="<?= base_url('masterdata/bank') ?>">Bank</a></li>
                     <li class="<?= $request->uri->getSegment(2) == 'jadwal' ? 'active' : '' ?>"><a class="nav-link"
                             href="<?= base_url('masterdata/jadwal') ?>">Jadwal</a></li>
                 </ul>

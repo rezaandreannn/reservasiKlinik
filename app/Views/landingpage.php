@@ -177,6 +177,21 @@
         </div>
     </section>
 
+    <!-- Payment Method Section -->
+    <section class="my-5">
+        <div class="container">
+            <h2>Metode Pembayaran</h2>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <?php foreach($banks as $bank) : ?>
+                    <img src="<?= base_url('bank/images/'. $bank->logo_bank) ?>" height="70" witdh="50"
+                        alt="<?= $bank->nama_bank ?>">
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="text-white py-3 main-color">
         <div class="container">

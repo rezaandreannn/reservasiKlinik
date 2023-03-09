@@ -88,6 +88,14 @@ $routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {
     $routes->post('jadwal', 'Jadwal::create');
     $routes->put('jadwal/(:num)', 'Jadwal::update/$1');
     $routes->delete('jadwal/(:num)', 'Jadwal::delete/$1');
+
+    // routes bank 
+    $routes->get('bank', 'Bank::index');
+    $routes->get('bank/baru', 'Bank::new');
+    $routes->get('bank/ubah/(:num)', 'Bank::edit/$1');
+    $routes->post('bank', 'Bank::create');
+    $routes->put('bank/(:num)', 'Bank::update/$1');
+    $routes->delete('bank/(:num)', 'Bank::delete/$1');
 });
 
 /*
