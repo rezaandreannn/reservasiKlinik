@@ -79,6 +79,17 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
 
 });
 
+// route master data
+$routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {
+    // routes jadwal 
+    $routes->get('jadwal', 'Jadwal::index');
+    $routes->get('jadwal/baru', 'Jadwal::new');
+    $routes->get('jadwal/ubah/(:num)', 'Jadwal::edit/$1');
+    $routes->post('jadwal', 'Jadwal::create');
+    $routes->put('jadwal/(:num)', 'Jadwal::update/$1');
+    $routes->delete('jadwal/(:num)', 'Jadwal::delete/$1');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

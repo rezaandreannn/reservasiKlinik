@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoriesModel extends Model
+class JadwalModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'categories';
+    protected $table            = 'jadwal';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     
     protected $allowedFields    = [
-        'name', 'description'
+        'hari_buka', 'jam_buka', 'jam_tutup'
     ];
 
     // Dates
@@ -21,11 +21,9 @@ class CategoriesModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'name'         => 'required',
-        'description'         => 'required',
+        'hari_buka'         => 'required',
+        'jam_buka'         => 'required',
+        'jam_tutup'         => 'required',
     ];
     protected $validationMessages   = [];
-
-
-
 }

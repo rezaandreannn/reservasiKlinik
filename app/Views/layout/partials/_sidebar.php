@@ -15,7 +15,7 @@
             <li class=""><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'masterdata' ? 'active' : '' ?>">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Master Data</span></a>
                 <ul class="dropdown-menu">
@@ -23,7 +23,8 @@
                             href="<?= base_url('admin/category') ?>">Category</a></li> -->
                     <li><a class="nav-link" href="layout-transparent.html">Treatment</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Bank</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Jadwal</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'jadwal' ? 'active' : '' ?>"><a class="nav-link"
+                            href="<?= base_url('masterdata/jadwal') ?>">Jadwal</a></li>
                 </ul>
             </li>
             <li class=""><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
