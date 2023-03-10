@@ -169,6 +169,7 @@
                             <h5 class="card-title">Treatment 3</h5>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
                                 porttitor mauris sit amet lacus lobortis posuere.</p>
+                            <p class="card-text"><strong>Price: $50</strong></p>
                             <a href="#" class="btn btn-primary">Reserve</a>
                         </div>
                     </div>

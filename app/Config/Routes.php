@@ -96,6 +96,14 @@ $routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {
     $routes->post('bank', 'Bank::create');
     $routes->put('bank/(:num)', 'Bank::update/$1');
     $routes->delete('bank/(:num)', 'Bank::delete/$1');
+
+    // routes treatment 
+    $routes->get('treatment', 'Treatment::index');
+    $routes->get('treatment/baru', 'Treatment::new');
+    $routes->get('treatment/ubah/(:num)', 'Treatment::edit/$1');
+    $routes->post('treatment', 'Treatment::create');
+    $routes->put('treatment/(:num)', 'Treatment::update/$1');
+    $routes->delete('treatment/(:num)', 'Treatment::delete/$1');
 });
 
 /*
