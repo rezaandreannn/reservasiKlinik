@@ -82,7 +82,6 @@
 
 <!-- JS Libraies -->
 <?= $this->section('jsLibrary') ?>
-
 <script src="<?= base_url('stisla/node_modules/selectric/public/jquery.selectric.min.js') ?>"></script>
 <?= $this->endSection() ?>
 

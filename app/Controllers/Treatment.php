@@ -2,16 +2,20 @@
 
 namespace App\Controllers;
 
+use App\Models\KategoriModel;
 use App\Models\TreatmentModel;
 use App\Controllers\BaseController;
+
+
 
 class Treatment extends BaseController
 {
 
-    protected $treatment, $session;
+    protected $treatment, $session, $kategori;
 
     public function __construct(){
         $this->treatment = new TreatmentModel();
+        $this->kategori = new KategoriModel();
         $this->session = service('session');
     }
 
@@ -22,8 +26,10 @@ class Treatment extends BaseController
             'breadcrumbs' => [
                 'Dashboard' => '',
             ],
-            'treatments' => $this->treatment->findAll()
+            'treatments' => $this->treatment->getAllWithKategori()
         ];
+
+        // dd($data['treatments']);
 
        return view('backend/treatment/index', $data); 
     }
@@ -36,6 +42,7 @@ class Treatment extends BaseController
                 'Dashboard' => '',
                 'treatment' =>base_url('masterdata/treatment') ,
             ],
+            'kategori' => $this->kategori->findAll()
         ];
 
        return view('backend/treatment/create', $data); 
@@ -51,7 +58,7 @@ class Treatment extends BaseController
                     'required' => 'Bidang {field} Tidak Boleh Kosong.',
                 ]
             ],
-            'kategori' => [
+            'kategori_id' => [
                 'label' => 'Kategori',
                 'rules' => 'required',
                 'errors' => [
@@ -68,6 +75,13 @@ class Treatment extends BaseController
             ],
             'deskripsi' => [
                 'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.'
+                ]
+            ],
+            'durasi' => [
+                'label' => 'durasi',
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Bidang {field} Tidak Boleh Kosong.'
@@ -116,7 +130,8 @@ class Treatment extends BaseController
                 'Dashboard' => '',
                 'treatment' =>base_url('masterdata/treatment') ,
             ],
-            'treatment' => $this->treatment->find($id)
+            'treatment' => $this->treatment->find($id),
+            'kategori' => $this->kategori->findAll()
         ];
 
        return view('backend/treatment/edit', $data); 
@@ -132,7 +147,7 @@ class Treatment extends BaseController
                     'required' => 'Bidang {field} Tidak Boleh Kosong.',
                 ]
             ],
-            'kategori' => [
+            'kategori_id' => [
                 'label' => 'Kategori',
                 'rules' => 'required',
                 'errors' => [
@@ -149,6 +164,13 @@ class Treatment extends BaseController
             ],
             'deskripsi' => [
                 'label' => 'Deskripsi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.'
+                ]
+            ],
+            'durasi' => [
+                'label' => 'durasi',
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Bidang {field} Tidak Boleh Kosong.'

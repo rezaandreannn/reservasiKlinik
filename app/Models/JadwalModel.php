@@ -26,4 +26,9 @@ class JadwalModel extends Model
         'jam_tutup'         => 'required',
     ];
     protected $validationMessages   = [];
+
+    public function getJadwalByDay($day)
+    {
+        return $this->where('hari_buka', $day)->first();
+    }
 }

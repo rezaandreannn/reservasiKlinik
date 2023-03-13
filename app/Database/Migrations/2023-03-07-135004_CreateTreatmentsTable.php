@@ -19,9 +19,10 @@ class CreateTreatmentsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255
             ],
-            'kategori' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255
+            'kategori_id' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => true, // added unsigned attribute
             ],
             'gambar' => [
                 'type' => 'VARCHAR',
@@ -34,6 +35,9 @@ class CreateTreatmentsTable extends Migration
                 'type' => 'INT',
                 'constraint' => 30,
                 'default' => 0
+            ],
+            'durasi' => [
+                'type' => 'TIME',    
             ],
             'created_at' => [
 				'type' => 'DATETIME',

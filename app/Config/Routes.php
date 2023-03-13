@@ -37,15 +37,20 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/treatment', 'Frond\Treatment::index');
+
+$routes->get('/reservasi/(:num)', 'Frond\Reservasi::index/$1');
+$routes->post('/jadwal/cek_jadwal', 'Frond\Reservasi::validasiWaktu');
+
 $routes->get('/dashboard', 'Dashboard::index');
 
 
 
 
+
+
+
 $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
-    // routes manage categories
-    $routes->get('category', 'Categories::index');
-    $routes->get('category/new', 'Categories::new');
 
     // routes manage user
     $routes->get('pengguna', 'User::index');
@@ -88,6 +93,14 @@ $routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {
     $routes->post('jadwal', 'Jadwal::create');
     $routes->put('jadwal/(:num)', 'Jadwal::update/$1');
     $routes->delete('jadwal/(:num)', 'Jadwal::delete/$1');
+
+    // routes kategori 
+    $routes->get('kategori', 'Kategori::index');
+    $routes->get('kategori/baru', 'Kategori::new');
+    $routes->get('kategori/ubah/(:num)', 'Kategori::edit/$1');
+    $routes->post('kategori', 'Kategori::create');
+    $routes->put('kategori/(:num)', 'Kategori::update/$1');
+    $routes->delete('kategori/(:num)', 'Kategori::delete/$1');
 
     // routes bank 
     $routes->get('bank', 'Bank::index');

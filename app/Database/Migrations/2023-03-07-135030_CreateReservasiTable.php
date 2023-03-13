@@ -25,11 +25,6 @@ class CreateReservasiTable extends Migration
                 'constraint' => 5,
                 'unsigned' => true, // added unsigned attribute
             ],
-            'jadwal_id' => [
-                'type' => 'INT',
-                'constraint' => 5,
-                'unsigned' => true, // added unsigned attribute
-            ],
             'tanggal_reservasi' => [
                 'type' => 'DATE',
             ],
@@ -58,7 +53,6 @@ class CreateReservasiTable extends Migration
         
         $this->forge->addForeignKey('user_id', 'users', 'id');
         $this->forge->addForeignKey('treatment_id', 'treatments', 'id');
-        $this->forge->addForeignKey('jadwal_id', 'jadwal', 'id');
 
         $this->forge->addKey('id', true);
         $this->forge->createTable('reservasi');

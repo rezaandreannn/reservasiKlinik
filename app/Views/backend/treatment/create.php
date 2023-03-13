@@ -40,11 +40,18 @@
                                         <div class="col-12">
                                             <div class="form-group mb-3">
                                                 <label class="mb-1">Kategori<span class="text-danger">*</span></label>
-                                                <input type="text" id="kategori"
-                                                    class="form-control <?= session('errors.kategori') ? 'is-invalid' : '' ?>"
-                                                    name="kategori" value="<?= old('kategori') ?>">
+                                                <select
+                                                    class="form-control selectric <?= session('errors.kategori_id') ? 'is-invalid' : '' ?>"
+                                                    name="kategori_id">
+                                                    <option value="">-- Pilih kategori --</option>
+                                                    <?php foreach ($kategori as $value) : ?>
+                                                    <option value="<?= $value->id ?>"
+                                                        <?= old('kategori_id') == $value->id ? 'selected' : '' ?>>
+                                                        <?= $value->nama_kategori ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                                 <div class="invalid-feedback">
-                                                    <?= session('errors.kategori') ?>
+                                                    <?= session('errors.kategori_id') ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,6 +64,18 @@
                                                     name="harga" value="<?= old('harga') ?>">
                                                 <div class="invalid-feedback">
                                                     <?= session('errors.harga') ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- input durasi -->
+                                        <div class="col-12">
+                                            <div class="form-group mb-3">
+                                                <label class="mb-1">Durasi<span class="text-danger">*</span></label>
+                                                <input type="time" id="durasi"
+                                                    class="form-control <?= session('errors.durasi') ? 'is-invalid' : '' ?>"
+                                                    name="durasi" value="<?= old('durasi') ?>">
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.durasi') ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,12 +121,13 @@
 
 <!-- CSS Libraries -->
 <?= $this->section('cssLibrary') ?>
-
+<link rel="stylesheet" href="<?= base_url('stisla/node_modules/selectric/public/selectric.css') ?>">
 <?= $this->endSection() ?>
 
 <!-- JS Libraies -->
 <?= $this->section('jsLibrary') ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="<?= base_url('stisla/node_modules/selectric/public/jquery.selectric.min.js') ?>"></script>
 
 
 <?= $this->endSection() ?>

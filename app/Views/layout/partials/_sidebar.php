@@ -19,8 +19,8 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Master Data</span></a>
                 <ul class="dropdown-menu">
-                    <!-- <li class="<?= $request->uri->getSegment(2) == 'categories' ? 'active' : '' ?>"><a class="nav-link"
-                            href="<?= base_url('admin/category') ?>">Category</a></li> -->
+                    <li class="<?= $request->uri->getSegment(2) == 'kategori' ? 'active' : '' ?>"><a class="nav-link"
+                            href="<?= base_url('masterdata/kategori') ?>">Kategori</a></li>
                     <li class="<?= $request->uri->getSegment(2) == 'treatment' ? 'active' : '' ?>"><a class="nav-link"
                             href="<?= base_url('masterdata/treatment') ?>">Treatment</a></li>
                     <li class="<?= $request->uri->getSegment(2) == 'bank' ? 'active' : '' ?>"><a class="nav-link"

@@ -25,17 +25,12 @@ class CreatePembayaranTable extends Migration
                 'constraint' => 5,
                 'unsigned' => true, // added unsigned attribute
             ],
-            'jenis_bayar' => [
-                'type' => 'ENUM',
-                'constraint' => ['DP', 'Cash'],
-                'default' => 'DP'
-            ],
             'bukti_bayar' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => true,
             ],
-            'sisa_pembayaran' => [
+            'jumlah_bayar' => [
                 'type' => 'INT',
                 'constraint' => 30,
                 'default' => 0
