@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $treatment->nama_treatment ?></h5>
                         <p class="card-text"><?= $treatment->deskripsi ?>.</p>
-                        <small class="card-text">durasi treatment &plusmn;
+                        <small class="card-text">Durasi &plusmn;
                             <?= format_time($treatment->durasi) ?></small>
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-text mb-0">

@@ -12,6 +12,12 @@
     <!-- Nunito Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 
+    <!-- CSS Libraries -->
+    <?= $this->renderSection('cssLibrary') ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css"
+        integrity="sha256-sWZjHQiY9fvheUAOoxrszw9Wphl3zqfVaz1kZKEvot8=" crossorigin="anonymous">
+
+
     <!-- Custom CSS -->
     <style>
         body {
@@ -68,7 +74,7 @@
                         <a class="nav-link text-white" href="#">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white active" href="#">Layanan</a>
+                        <a class="nav-link text-white active" href="<?= base_url('treatment') ?>">Layanan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Kontak Kami</a>
@@ -143,6 +149,11 @@
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- JS Libraies -->
+    <?= $this->renderSection('jsLibrary') ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"
+        integrity="sha256-t0FDfwj/WoMHIBbmFfuOtZv1wtA977QCfsFR3p1K4No=" crossorigin="anonymous"></script>
 
 
     <!-- Page Specific JS File -->

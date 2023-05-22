@@ -30,6 +30,7 @@
                         <table class="table table-striped table-md">
                             <tr>
                                 <th>No</th>
+                                <th>Kode Bank</th>
                                 <th>Nama Bank</th>
                                 <th>No Rekening</th>
                                 <th>Logo</th>
@@ -40,7 +41,8 @@
                             <?php foreach($banks as $bank) : ?>
                             <tr>
                                 <td class="align-middle"><?= $no++ ?></td>
-                                <td class="align-middle"><?= strtoupper($bank->nama_bank) ?></td>
+                                <td class="align-middle"><?= strtoupper($bank->kode_bank) ?></td>
+                                <td class="align-middle"><?= ucfirst($bank->nama_bank) ?></td>
                                 <td class="align-middle"><?= $bank->no_rekening ?></td>
                                 <td>
                                     <img src="<?= base_url('bank/images/'. $bank->logo_bank) ?>" height="70" witdh="70"

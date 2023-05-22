@@ -15,6 +15,10 @@ class CreateBankTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
+            'kode_bank' => [
+                'type' => 'VARCHAR',
+                'constraint' => 30
+            ],
             'nama_bank' => [
                 'type' => 'VARCHAR',
                 'constraint' => 30

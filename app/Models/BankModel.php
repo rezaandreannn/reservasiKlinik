@@ -13,7 +13,7 @@ class BankModel extends Model
     protected $returnType       = 'object';
     
     protected $allowedFields    = [
-        'nama_bank', 'no_rekening', 'logo_bank', 'status'
+       'kode_bank', 'nama_bank', 'no_rekening', 'logo_bank', 'status'
     ];
 
     // Dates

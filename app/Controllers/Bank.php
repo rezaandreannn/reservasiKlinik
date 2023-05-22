@@ -44,6 +44,13 @@ class Bank extends BaseController
     public function create(){
 
         $rules = [
+            'kode_bank' => [
+                'label' => 'Kode bank',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.',
+                ]
+            ],
             'nama_bank' => [
                 'label' => 'Nama bank',
                 'rules' => 'required',
@@ -60,7 +67,7 @@ class Bank extends BaseController
             ],
             'logo_bank' => [
                 'label' => 'Logo Bank',
-                'rules' => 'mime_in[logo,image/jpg,image/jpeg,image/png]|max_size[logo,4096]',
+                'rules' => 'mime_in[logo_bank,image/jpg,image/jpeg,image/png]|max_size[logo_bank,4096]',
                 'errors' => [
                     'mime_in'  => 'Jenis file harus (jpg,jpeg,png)',
                     'max_size' => 'Maksimal 4 Mb'
@@ -107,6 +114,13 @@ class Bank extends BaseController
     public function update($id = null){
 
         $rules = [
+            'kode_bank' => [
+                'label' => 'Kode bank',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.',
+                ]
+            ],
             'nama_bank' => [
                 'label' => 'Nama bank',
                 'rules' => 'required',

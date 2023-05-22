@@ -26,6 +26,18 @@
                                         <!-- input nama bank -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">
+                                                <label class="mb-1">Kode Bank<span class="text-danger">*</span></label>
+                                                <input type="text" id="kode_bank"
+                                                    class="form-control <?= session('errors.kode_bank') ? 'is-invalid' : '' ?>"
+                                                    name="kode_bank" value="<?= old('kode_bank') ?>">
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.kode_bank') ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- input nama bank -->
+                                        <div class="col-12">
+                                            <div class="form-group mb-3">
                                                 <label class="mb-1">Nama Bank<span class="text-danger">*</span></label>
                                                 <input type="text" id="nama_bank"
                                                     class="form-control <?= session('errors.nama_bank') ? 'is-invalid' : '' ?>"

@@ -51,15 +51,17 @@ class CreateReservasiTable extends Migration
 			],
         ]);
         
-        $this->forge->addForeignKey('user_id', 'users', 'id');
-        $this->forge->addForeignKey('treatment_id', 'treatments', 'id');
-
         $this->forge->addKey('id', true);
         $this->forge->createTable('reservasi');
+
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('treatment_id', 'treatments', 'id', 'CASCADE', 'CASCADE');
+
     }
 
     public function down()
     {
+        
         $this->forge->dropTable('reservasi');
     }
 }

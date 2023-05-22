@@ -29,7 +29,7 @@
                                                 <select
                                                     class="form-control selectric <?= session('errors.hari_buka') ? 'is-invalid' : '' ?>"
                                                     name="hari_buka">
-                                                    <option value="">--Pilih Hari--</option>
+                                                    <option value="" selected disabled>--Pilih Hari--</option>
                                                     <?php foreach ($hari as $value) : ?>
                                                     <option value="<?= $value ?>"
                                                         <?= old('hari_buka') == $value ? 'selected' : '' ?>>

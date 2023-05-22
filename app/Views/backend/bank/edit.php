@@ -24,6 +24,18 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-8 col-sm-12">
                                     <div class="row">
+                                        <!-- input kode bank -->
+                                        <div class="col-12">
+                                            <div class="form-group mb-3">
+                                                <label class="mb-1">Kode Bank<span class="text-danger">*</span></label>
+                                                <input type="text" id="kode_bank"
+                                                    class="form-control <?= session('errors.kode_bank') ? 'is-invalid' : '' ?>"
+                                                    name="kode_bank" value="<?= old('kode_bank', $bank->kode_bank) ?>">
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.kode_bank') ?>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- input nama bank -->
                                         <div class="col-12">
                                             <div class="form-group mb-3">

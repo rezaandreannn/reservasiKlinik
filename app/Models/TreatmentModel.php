@@ -34,6 +34,8 @@ class TreatmentModel extends Model
         return $query->getResult();
     }
 
+    
+
     public function getIdWithKategori($id = null)
     {
         $db = \Config\Database::connect();
