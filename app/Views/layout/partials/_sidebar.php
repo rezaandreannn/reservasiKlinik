@@ -5,14 +5,15 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Reservasi</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">RV</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class=""><a class="nav-link" href="#"><i class="fas fa-chart-line"></i>
+            <li class="<?= $request->uri->getSegment(1) == 'dashboard' ? 'active' : '' ?>"><a class="nav-link"
+                    href="<?= base_url('dashboard') ?>"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
             <li class="menu-header">Master Data</li>
             <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'masterdata' ? 'active' : '' ?>">
@@ -51,12 +52,12 @@
                             href="<?= base_url('admin/grup') ?>">Grup</a></li>
 
 
-                    <li class="<?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>"><a
+                    <!-- <li class="<?= $request->uri->getSegment(2) == 'perizinan' ? 'active' : '' ?>"><a
                             href="<?= base_url('admin/perizinan') ?>">Perizinan</a></li>
 
 
                     <li class="<?= $request->uri->getSegment(2) == 'perizinan-grup' ? 'active' : '' ?>"><a
-                            href="<?= base_url('admin/perizinan-grup') ?>">Perizinan grup</a></li>
+                            href="<?= base_url('admin/perizinan-grup') ?>">Perizinan grup</a></li> -->
 
                 </ul>
             </li>

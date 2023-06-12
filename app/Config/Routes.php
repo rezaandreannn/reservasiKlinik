@@ -41,11 +41,14 @@ $routes->get('/treatment', 'Frond\Treatment::index');
 
 $routes->get('/reservasi/(:num)', 'Frond\Reservasi::index/$1');
 $routes->post('/reservasi', 'Frond\Reservasi::create');
+
+$routes->get('/reservasi-saya', 'Frond\Reservasi::getAuth');
+
 $routes->post('/jadwal/cek_jadwal', 'Frond\Reservasi::validasiWaktu');
 $routes->post('/jadwal/get_data_reservasi', 'Frond\Reservasi::getReservasiByTanggal');
 $routes->post('/ambil_durasi', 'Frond\Reservasi::ambilDurasi');
 
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/dashboard', 'Dashboard::index',  ['filter' => 'role:admin']);
 
 
 

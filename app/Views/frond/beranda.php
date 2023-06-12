@@ -71,7 +71,8 @@
                             <p class="card-text mb-0">
                                 <strong><?= format_rupiah($treatment->harga) ?></strong>
                             </p>
-                            <a href="#" class="btn btn-primary">Reservasi</a>
+                            <a href="<?= base_url('reservasi/' . $treatment->id) ?>"
+                                class="btn btn-primary">Reservasi</a>
                         </div>
 
                     </div>

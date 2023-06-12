@@ -1,3 +1,6 @@
+<?php 
+ $request = \Config\Services::request();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,14 +74,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Beranda</a>
+                        <a class="nav-link text-white <?= $request->uri->getSegment(1) == '' ? 'active' : '' ?>"
+                            href="/">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white active" href="<?= base_url('treatment') ?>">Layanan</a>
+                        <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'treatment' ? 'active' : '' ?>"
+                            href="<?= base_url('treatment') ?>">Layanan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Kontak Kami</a>
                     </li>
+                    <?php if(logged_in()) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'reservasi-saya' ? 'active' : '' ?>"
+                            href="<?= base_url('reservasi-saya') ?>">Reservasi</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
 
 
@@ -91,7 +102,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profil</a>
-                            <a class="dropdown-item" href="#">Reservasi</a>
                             <?php if(in_groups('admin')) : ?>
                             <a class="dropdown-item" href="<?= base_url('dashboard')  ?>">Dashbaord</a>
                             <?php endif; ?>

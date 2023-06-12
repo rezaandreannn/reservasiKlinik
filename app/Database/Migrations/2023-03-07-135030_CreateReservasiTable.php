@@ -15,6 +15,10 @@ class CreateReservasiTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
+            'kode_reservasi' => [
+                'type' => 'TEXT',
+                'null' => true
+            ],
             'user_id' => [
                 'type' => 'INT',
                 'constraint' => 5,
@@ -40,7 +44,7 @@ class CreateReservasiTable extends Migration
             ],
             'status_reservasi' => [
                 'type' => 'ENUM',
-                'constraint'  => ['pending','konfirmasi', 'batal'],
+                'constraint'  => ['pending','selesai', 'batal'],
                 'default' => 'pending'
             ],
             'created_at' => [

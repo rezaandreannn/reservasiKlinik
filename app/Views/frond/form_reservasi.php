@@ -198,8 +198,9 @@
             var errorElem = document.getElementById("jam_mulai_message");
             if (errorElem) {
               errorElem.innerHTML = result.message;
-
             }
+            document.getElementById("jam_selesai").value = "";
+            document.getElementById("jam_mulai").value = "";
           }
         },
         error: function (xhr, status, error) {
@@ -218,6 +219,7 @@
     $("#jam_mulai").on("change", function () {
       var jamMulai = $(this).val(); // Nilai jam mulai yang diinputkan
       var idTreatment = $('#treatment_id').val();
+      // var jamSelesai = $('#jam_selesai').val();
 
 
       // Mengirim permintaan AJAX untuk mengambil durasi dari database
@@ -269,7 +271,7 @@
 <?php $message = session()->getFlashdata('message'); ?>
 <script>
   Swal.fire(
-    'Sukses!',
+    'Sukses! 😆',
     '<?= $message ?>',
     'success'
   )
@@ -280,7 +282,7 @@
 <?php $error = session()->getFlashdata('error'); ?>
 <script>
   Swal.fire(
-    'Error!',
+    'Error! 😞',
     '<?= $error ?>',
     'error'
   )

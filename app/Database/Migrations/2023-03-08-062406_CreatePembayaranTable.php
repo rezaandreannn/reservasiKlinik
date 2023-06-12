@@ -15,6 +15,10 @@ class CreatePembayaranTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
+            'invoice' => [
+                'type' => 'TEXT',
+                'null' => true
+            ],
             'reservasi_id' => [
                 'type' => 'INT',
                 'constraint' => 5,
@@ -35,9 +39,9 @@ class CreatePembayaranTable extends Migration
                 'constraint' => 30,
                 'default' => 0
             ],
-            'status' => [
+            'status_bayar' => [
                 'type' => 'ENUM',
-                'constraint' => ['pending', 'konfirmasi', 'selesai', 'batal'],
+                'constraint' => ['pending', 'lunas'],
                 'default' => 'pending'
             ],
             'created_at' => [

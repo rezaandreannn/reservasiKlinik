@@ -14,7 +14,7 @@
                 <div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">d</div>
+                <!-- <div class="dropdown-title">d</div> -->
                 <a href="features-profile.html" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
@@ -23,9 +23,9 @@
                     <i class="fas fa-bolt"></i> Halaman utama
                 </a>
                 <?php endif; ?>
-                <a href="features-settings.html" class="dropdown-item has-icon">
+                <!-- <a href="features-settings.html" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Settings
-                </a>
+                </a> -->
                 <div class="dropdown-divider"></div>
                 <a href="<?= base_url('logout') ?>" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout

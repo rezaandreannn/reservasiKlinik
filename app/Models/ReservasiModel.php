@@ -13,24 +13,12 @@ class ReservasiModel extends Model
     protected $returnType       = 'object';
     
     protected $allowedFields    = [
-        'user_id', 'treatment_id','tanggal_reservasi', 'jam_mulai', 'jam_selesai', 'deskripsi', 'status_reservasi'
+       'kode_reservasi', 'user_id', 'treatment_id','tanggal_reservasi', 'jam_mulai', 'jam_selesai', 'deskripsi', 'status_reservasi'
     ];
 
     // Dates
     protected $useTimestamps = true;
 
-    // // Validation
-    // protected $validationRules      = [
-    //     'hari_buka'         => 'required',
-    //     'jam_buka'         => 'required',
-    //     'jam_tutup'         => 'required',
-    // ];
-    // protected $validationMessages   = [];
-
-    // public function getJadwalByDay($day)
-    // {
-    //     return $this->where('hari_buka', $day)->first();
-    // }
 
     public function getAllByTanggal($tanggal = null)
     {
@@ -40,6 +28,23 @@ class ReservasiModel extends Model
             ->select('reservasi.*, users.username')
             ->join('users', 'users.id = reservasi.user_id')
             ->where('tanggal_reservasi', $tanggal)
+            ->orderBy('reservasi.jam_mulai', 'asc')
+            ->get();
+
+        return $query->getResult();
+    }
+
+    public function getTreatmentByUser($userId = null)
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, treatments.nama_treatment')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('user_id', $userId)
+            ->where('status_reservasi', 'pending')
+            ->where("DATE(tanggal_reservasi) >= CURDATE()")
+            ->orderBy('reservasi.tanggal_reservasi', 'asc')
             ->get();
 
         return $query->getResult();

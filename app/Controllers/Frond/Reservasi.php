@@ -31,9 +31,21 @@ class Reservasi extends BaseController
             'treatment' => $this->treatment->getIdWithKategori($treatment)
         ];
 
-      
-
         return view('frond/form_reservasi', $data);
+    }
+
+    public function getAuth()
+    {
+        $loggedInUser = user()->id;
+        
+        $authReservasi = $this->reservasi->getTreatmentByUser($loggedInUser);
+
+        $data = [
+            'authReservasi' => $authReservasi
+        ];
+        // \var_dump($authReservasi);
+
+        return view('frond/reservasi', $data);
     }
 
 
@@ -66,19 +78,24 @@ class Reservasi extends BaseController
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
-    
+
 
     $data = $this->request->getPost(); //ambil inputan post
     $data['treatment_id'] = $this->request->getPost('treatment_id'); //ambil inputan post
+    $data['kode_reservasi'] = 'RSV-' . date('Ymd'). '-'.  str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
     $data['user_id'] = user()->id;
 
     $isValid = $this->checkReservationRange($data['jam_mulai'], $data['jam_selesai'], $data['tanggal_reservasi']);
 
-    // \var_dump($isValid);
-    // die;
     if ($isValid) {
-        $this->reservasi->insert($data); // simpan ke database
-        return redirect()->back()->with('message', 'Berhasil Reservasi');
+        $exitsByUser = $this->checkExitsTangglByUser($data['user_id'] , $data['tanggal_reservasi']);
+
+        if ($exitsByUser) {
+            $this->reservasi->insert($data); // simpan ke database
+            return redirect()->to(base_url('reservasi-saya'))->with('message', 'Berhasil Melakukan Reservasi.');
+        }else{
+            return redirect()->back()->with('error', 'Anda sudah melakukan reservasi pada tanggal' .' '. date('d/m/Y', strtotime($data['tanggal_reservasi'])));  
+        }
     }else{
         return redirect()->back()->with('error', 'Waktu yang anda pilih sudah ada yang Reservasi');
 
@@ -121,7 +138,7 @@ class Reservasi extends BaseController
                     break;
                 }
 
-                // dd($hari);
+               
 
             // Pengecekan apakah waktu yang dimasukkan oleh user sesuai dengan jadwal
             $jadwalModel = new JadwalModel();
@@ -166,29 +183,9 @@ class Reservasi extends BaseController
         echo json_encode($response);
     }
 
-    // public function validateReservationRange()
-    // {
-    //     $jamMulai = $this->request->getPost('jam_mulai'); // Ambil data jam mulai dari permintaan POST
-    //     $jamSelesai = $this->request->getPost('jam_selesai'); // Ambil data jam selesai dari permintaan POST
-
-    //     // Lakukan validasi rentang waktu di sini
-    //     // ...
-
-    //     // Contoh validasi rentang waktu
-    //     $isValid = $this->checkReservationRange($jamMulai, $jamSelesai);
-
-    //     // Kirimkan respons berdasarkan hasil validasi
-    //     return $this->response->setJSON(['valid' => $isValid]);
-    // }
 
     private function checkReservationRange($jamMulai, $jamSelesai, $tanggal_reservasi)
     {
-        // Logika validasi rentang waktu
-        // Misalnya, cek apakah rentang waktu tersebut bertabrakan dengan reservasi yang ada di database
-        // ...
-
-        // Contoh validasi rentang waktu
-        // $reservationModel = new ReservationModel();
         $existingReservation = $this->reservasi
         ->where('tanggal_reservasi', $tanggal_reservasi)
             ->where('jam_mulai <', $jamSelesai)
@@ -196,6 +193,17 @@ class Reservasi extends BaseController
             ->countAllResults();
 
         return ($existingReservation > 0) ? false : true;
+    }
+
+    private function checkExitsTangglByUser($userId, $tanggalReservasi)
+    {
+        $existingReservation = $this->reservasi
+        ->where('tanggal_reservasi',  $tanggalReservasi)
+        ->where('user_id',  $userId)
+        ->countAllResults();
+
+        return ($existingReservation > 0) ? false : true;
+
     }
 
 
