@@ -81,9 +81,9 @@
                         <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'treatment' ? 'active' : '' ?>"
                             href="<?= base_url('treatment') ?>">Layanan</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link text-white" href="#">Kontak Kami</a>
-                    </li>
+                    </li> -->
                     <?php if(logged_in()) : ?>
                     <li class="nav-item">
                         <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'reservasi-saya' ? 'active' : '' ?>"
@@ -101,7 +101,7 @@
                             Hi, <?= user()->username ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profil</a>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Profil</a>
                             <?php if(in_groups('admin')) : ?>
                             <a class="dropdown-item" href="<?= base_url('dashboard')  ?>">Dashbaord</a>
                             <?php endif; ?>
@@ -111,10 +111,10 @@
                     </li>
                     <?php else : ?>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= base_url('login') ?>">Masuk</a>
+                        <a class="btn btn-warning" href="<?= base_url('login') ?>">Masuk</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= base_url('register') ?>">Daftar</a>
+                        <a class="btn btn-warning ml-2" href="<?= base_url('register') ?>">Daftar</a>
                     </li>
                     <?php endif; ?>
                 </ul>
@@ -123,6 +123,34 @@
     </nav>
 
     <?= $this->renderSection('main') ?>
+
+
+
+    <!-- Modal profile -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">username</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">Email
+                        </div>
+                        <div class="col-6">fjdsgfjkdsf
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="text-white py-3 main-color">

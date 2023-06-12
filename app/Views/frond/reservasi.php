@@ -28,8 +28,9 @@
                                     <td><?= $value->jam_mulai ?></td>
                                     <td><?= $value->jam_selesai ?></td>
                                     <td>
-                                        <a href="http://" class="badge badge-success">Bayar</a>
-                                        <a href="http://" class="badge badge-danger">Cancel</a>
+                                        <a href="http://" class="btn btn-info btn-sm">Cetak</a>
+                                        <a href="http://" class="btn btn-success btn-sm">Bayar</a>
+                                        <a href="http://" class="btn btn-danger btn-sm">Cancel</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
