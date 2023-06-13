@@ -38,6 +38,27 @@ class CreateReservasiTable extends Migration
             'jam_selesai' => [
                 'type' => 'TIME',    
             ],
+            'type_pembayaran' => [
+                'type' => 'ENUM',
+                'constraint'  => ['bayar offline','bayar online'],
+                'default' => 'bayar offline'
+            ],
+            'bank_id' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => true, // added unsigned attribute
+                'null' => true
+            ],
+            'bukti_bayar' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            'jumlah_bayar' => [
+                'type' => 'INT',
+                'constraint' => 30,
+                'null' => true 
+            ],
             'deskripsi' => [
                 'type' => 'TEXT',
                 'null' => true
