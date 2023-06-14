@@ -19,6 +19,20 @@ class ReservasiModel extends Model
     // Dates
     protected $useTimestamps = true;
 
+    public function getAll()
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, users.username, treatments.nama_treatment')
+            ->join('users', 'users.id = reservasi.user_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->orderBy('reservasi.id', 'desc')
+            ->get();
+
+        return $query->getResult();
+    }
+
 
     public function getAllByTanggal($tanggal = null)
     {

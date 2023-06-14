@@ -7,6 +7,7 @@ use App\Controllers\User;
 use App\Controllers\Dashboard;
 use App\Controllers\Categories;
 use App\Controllers\Permission;
+use App\Controllers\UserReservasi;
 use App\Controllers\RoleHasPermission;
 
 // Create a new instance of our RouteCollection class.
@@ -87,6 +88,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->get('perizinan-grup', 'RoleHasPermission::index');
     $routes->get('perizinan-grup/(:num)', 'RoleHasPermission::show/$1');
     $routes->post('changepermission', 'RoleHasPermission::changePermission');
+
+    $routes->get('user-reservasi', 'UserReservasi::index');
 
 });
 

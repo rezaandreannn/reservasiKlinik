@@ -30,7 +30,8 @@
                             href="<?= base_url('masterdata/jadwal') ?>">Jadwal</a></li>
                 </ul>
             </li>
-            <li class=""><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
+            <li class="<?= $request->uri->getSegment(2) == 'user-reservasi' ? 'active' : '' ?>"><a class="nav-link"
+                    href="<?= base_url('admin/user-reservasi') ?>"><i class="far fa-square"></i>
                     <span>User Reservasi</span></a></li>
 
 

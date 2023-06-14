@@ -87,6 +87,9 @@ class Reservasi extends BaseController
 
     $data = $this->request->getPost(); //ambil inputan post
 
+    $jumlahBayar = intval(str_replace('.','', $this->request->getPost('jumlah_bayar')));
+  
+
     $data['type_pembayaran'] = $this->request->getPost('type_bayar');
     if ($this->request->getPost('type_bayar') == 'bayar online') {
        $data['bank_id'] = $this->request->getPost('bank_id');
@@ -94,7 +97,7 @@ class Reservasi extends BaseController
     $data['treatment_id'] = $this->request->getPost('treatment_id'); //ambil inputan post
     $data['kode_reservasi'] = 'RSV-' . date('Ymd'). '-'.  str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
     $data['user_id'] = user()->id;
-    $data['jumlah_bayar'] = $this->request->getPost('jumlah_bayar');
+    $data['jumlah_bayar'] = $jumlahBayar;
 
     $isValid = $this->checkReservationRange($data['jam_mulai'], $data['jam_selesai'], $data['tanggal_reservasi']);
 
@@ -102,8 +105,15 @@ class Reservasi extends BaseController
         $exitsByUser = $this->checkExitsTangglByUser($data['user_id'] , $data['tanggal_reservasi']);
 
         if ($exitsByUser) {
-            $this->reservasi->insert($data); // simpan ke database
-            return redirect()->to(base_url('reservasi-saya'))->with('message', 'Berhasil Melakukan Reservasi.');
+            $this->reservasi->insert($data); 
+            // pesan berdasakan tipe
+            if ($data['type_pembayaran'] == 'bayar offline') {
+               $message = 'Lakukan Pembayaran saat anda selesai melakukan treatment';
+            }else{
+                $message = 'Lakukan Pembayaran sebelum tanggal ' . $this->request->getPost('tanggal_reservasi') .' dan segera upload bukti bayar';
+            }
+
+            return redirect()->to(base_url('reservasi-saya'))->with('message', 'Berhasil Melakukan Reservasi.\n'.$message.'');
         }else{
             return redirect()->back()->with('error', 'Anda sudah melakukan reservasi pada tanggal' .' '. date('d/m/Y', strtotime($data['tanggal_reservasi'])));  
         }
@@ -216,6 +226,66 @@ class Reservasi extends BaseController
         return ($existingReservation > 0) ? false : true;
 
     }
+
+    // public function cetak()
+    // {
+    //     // create new PDF document
+    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+    //     // set document information
+    //     $pdf->SetCreator(PDF_CREATOR);
+    //     $pdf->SetAuthor('Sobatcoding.com');
+    //     $pdf->SetTitle('PDF Sobatcoding.com');
+    //     $pdf->SetSubject('TCPDF Tutorial');
+    //     $pdf->SetKeywords('TCPDF, PDF, example, sobatcoding.com');
+
+    //     // set default header data
+    //     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+    //     $pdf->setFooterData(array(0,64,0), array(0,64,128));
+
+    //     // set header and footer fonts
+    //     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    //     $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+    //     // set default monospaced font
+    //     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    //     // set margins
+    //     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    //     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    //     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    //     // set auto page breaks
+    //     $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    //     // set image scale factor
+    //     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    //     // set default font subsetting mode
+    //     $pdf->setFontSubsetting(true);
+
+    //     // Set font
+    //     // dejavusans is a UTF-8 Unicode font, if you only need to
+    //     // print standard ASCII chars, you can use core fonts like
+    //     // helvetica or times to reduce file size.
+    //     $pdf->SetFont('dejavusans', '', 14, '', true);
+
+    //     // Add a page
+    //     // This method has several options, check the source code documentation for more information.
+    //     $pdf->AddPage();
+
+    //    //view mengarah ke invoice.php
+    //     $html = view('invoice');
+
+    //     // Print text using writeHTMLCell()
+    //     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
+    //     // ---------------------------------------------------------
+    //     $this->response->setContentType('application/pdf');
+    //     // Close and output PDF document
+    //     // This method has several options, check the source code documentation for more information.
+    //     $pdf->Output('invoice-pos-sobatcoding.pdf', 'I');
+    // }
 
 
 }
