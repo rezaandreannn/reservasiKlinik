@@ -59,13 +59,18 @@ class CreateReservasiTable extends Migration
                 'constraint' => 30,
                 'null' => true 
             ],
+            'status_bayar' => [
+                'type' => 'ENUM',
+                'constraint'  => ['belum lunas','lunas'],
+                'default' => 'belum lunas'
+            ],
             'deskripsi' => [
                 'type' => 'TEXT',
                 'null' => true
             ],
             'status_reservasi' => [
                 'type' => 'ENUM',
-                'constraint'  => ['pending','selesai', 'batal'],
+                'constraint'  => ['pending','proses','selesai', 'batal'],
                 'default' => 'pending'
             ],
             'created_at' => [

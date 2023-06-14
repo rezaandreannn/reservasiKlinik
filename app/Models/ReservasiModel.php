@@ -13,7 +13,7 @@ class ReservasiModel extends Model
     protected $returnType       = 'object';
     
     protected $allowedFields    = [
-       'kode_reservasi', 'user_id', 'treatment_id','tanggal_reservasi', 'jam_mulai', 'jam_selesai', 'deskripsi', 'status_reservasi'
+       'kode_reservasi', 'user_id', 'treatment_id','tanggal_reservasi', 'jam_mulai', 'jam_selesai', 'deskripsi', 'status_reservasi', 'type_pembayaran', 'bank_id', 'jumlah_bayar', 'bukti_bayar', 'status_bayar'
     ];
 
     // Dates

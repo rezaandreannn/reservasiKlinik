@@ -40,6 +40,48 @@
                   <?= session('errors.jam_selesai') ?>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label for="type_bayar">Tipe Bayar</label>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type_bayar" id="bayar_offline" value="bayar offline" checked>
+                    <label class="form-check-label" for="bayar_offline">
+                      Bayar Offline
+                    </label>
+                  </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="type_bayar" id="bayar_online" value="bayar online" >
+                      <label class="form-check-label" for="bayar_online">
+                       Bayar Online
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="jumlah_bayar">Jumlah bayar</label>
+               <input type="text" name="jumlah_bayar" value="<?= $treatment->harga ?>" class="form-control" readonly>
+              </div>
+            <!-- show bayar online -->
+            <div class="show-bayar-online" style="display: none;">
+            <div class="form-group">
+                <label for="bank"></label>
+              <select name="bank_id" id="bank_id" class="form-control">
+                <option value="" selected disabled>-- pilih bank --</option>
+              <?php foreach ($banks as  $bank) : ?>
+                <option value="<?=  $bank->id?>"><?= $bank->kode_bank ?> - <?= $bank->no_rekening ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            </div>
+
+            <!--  end show bayar online -->
+
               <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
           </div>
@@ -76,6 +118,24 @@
 <?= $this->section('jsSpesific') ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+<script>
+  // Ambil elemen radio button yang menentukan tipe pembayaran
+  const bayarOffline = document.getElementById("bayar_offline");
+  const bayarOnline = document.getElementById("bayar_online");
+
+  // Ambil elemen yang menampilkan pilihan bank
+  const showBayarOnline = document.querySelector(".show-bayar-online");
+
+  // Tambahkan event listener untuk perubahan pada radio button
+  bayarOffline.addEventListener("change", function() {
+    showBayarOnline.style.display = "none"; // Sembunyikan pilihan bank
+    document.getElementById("bank").value = ""; // Kosongkan value pilihan bank
+  });
+
+  bayarOnline.addEventListener("change", function() {
+    showBayarOnline.style.display = "block"; // Tampilkan pilihan bank
+  });
+</script>
 
 <script>
   $(document).ready(function () {

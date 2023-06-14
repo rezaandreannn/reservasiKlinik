@@ -5,6 +5,7 @@ namespace App\Controllers\Frond;
 use DateTime;
 use DateTimeZone;
 use App\Models\JadwalModel;
+use App\Models\BankModel;
 use App\Models\ReservasiModel;
 use App\Models\TreatmentModel;
 use CodeIgniter\API\ResponseTrait;
@@ -15,12 +16,13 @@ class Reservasi extends BaseController
 {
     use ResponseTrait;
 
-    protected $treatment, $reservasi;
+    protected $treatment, $reservasi, $bank;
 
     public function __construct(){
        
         $this->treatment = new TreatmentModel();
         $this->reservasi = new ReservasiModel();
+        $this->bank = new BankModel();
        
     }
 
@@ -28,7 +30,8 @@ class Reservasi extends BaseController
     {
         $data = [
             'title' => 'reservasi',
-            'treatment' => $this->treatment->getIdWithKategori($treatment)
+            'treatment' => $this->treatment->getIdWithKategori($treatment),
+            'banks' => $this->bank->findAll()
         ];
 
         return view('frond/form_reservasi', $data);
@@ -79,11 +82,19 @@ class Reservasi extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+       
+
 
     $data = $this->request->getPost(); //ambil inputan post
+
+    $data['type_pembayaran'] = $this->request->getPost('type_bayar');
+    if ($this->request->getPost('type_bayar') == 'bayar online') {
+       $data['bank_id'] = $this->request->getPost('bank_id');
+    }
     $data['treatment_id'] = $this->request->getPost('treatment_id'); //ambil inputan post
     $data['kode_reservasi'] = 'RSV-' . date('Ymd'). '-'.  str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
     $data['user_id'] = user()->id;
+    $data['jumlah_bayar'] = $this->request->getPost('jumlah_bayar');
 
     $isValid = $this->checkReservationRange($data['jam_mulai'], $data['jam_selesai'], $data['tanggal_reservasi']);
 
