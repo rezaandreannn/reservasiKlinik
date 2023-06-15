@@ -42,8 +42,11 @@ $routes->get('/treatment', 'Frond\Treatment::index');
 
 $routes->get('/reservasi/(:num)', 'Frond\Reservasi::index/$1');
 $routes->post('/reservasi', 'Frond\Reservasi::create');
+$routes->put('/reservasi/batal/(:num)', 'Frond\Reservasi::batalReservasi/$1');
 
 $routes->get('/reservasi-saya', 'Frond\Reservasi::getAuth');
+$routes->get('/histori', 'Frond\Reservasi::getAuthHistori');
+$routes->get('/histori-cetak', 'Frond\Reservasi::cetakAuthHistori');
 
 $routes->post('/jadwal/cek_jadwal', 'Frond\Reservasi::validasiWaktu');
 $routes->post('/jadwal/get_data_reservasi', 'Frond\Reservasi::getReservasiByTanggal');
@@ -89,9 +92,15 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->get('perizinan-grup/(:num)', 'RoleHasPermission::show/$1');
     $routes->post('changepermission', 'RoleHasPermission::changePermission');
 
-    $routes->get('user-reservasi', 'UserReservasi::index');
-
+    
 });
+        $routes->group('reservasi', ['filter' => 'role:admin'], function($routes) {
+    
+        $routes->get('bayar-offline', 'UserReservasi::getBayarOffline');
+        $routes->put('bayar-offline/(:num)', 'UserReservasi::updateBayarOffline/$1');
+        $routes->get('bayar-online', 'UserReservasi::getBayarOnline');
+        $routes->delete('delete/(:num)', 'UserReservasi::delete/$1');
+        });
 
 // route master data
 $routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {

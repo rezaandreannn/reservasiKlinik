@@ -33,15 +33,48 @@ class ReservasiModel extends Model
         return $query->getResult();
     }
 
+    public function getBayarOffline()
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, users.username, treatments.nama_treatment')
+            ->join('users', 'users.id = reservasi.user_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('type_pembayaran', 'bayar offline')
+            ->orderBy('reservasi.id', 'desc')
+            ->get();
+
+        return $query->getResult();
+    }
+
+    public function getBayarOnline()
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, users.username, treatments.nama_treatment, bank.kode_bank')
+            ->join('users', 'users.id = reservasi.user_id')
+            ->join('bank', 'bank.id = reservasi.bank_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('type_pembayaran', 'bayar online')
+            ->orderBy('reservasi.id', 'desc')
+            ->get();
+
+        return $query->getResult();
+    }
+
 
     public function getAllByTanggal($tanggal = null)
     {
         $db = \Config\Database::connect();
 
         $query = $db->table($this->table)
-            ->select('reservasi.*, users.username')
+            ->select('reservasi.*, users.username, treatments.nama_treatment')
             ->join('users', 'users.id = reservasi.user_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
             ->where('tanggal_reservasi', $tanggal)
+            ->where('status_reservasi', 'pending')
             ->orderBy('reservasi.jam_mulai', 'asc')
             ->get();
 
@@ -58,6 +91,21 @@ class ReservasiModel extends Model
             ->where('user_id', $userId)
             ->where('status_reservasi', 'pending')
             ->where("DATE(tanggal_reservasi) >= CURDATE()")
+            ->orderBy('reservasi.tanggal_reservasi', 'asc')
+            ->get();
+
+        return $query->getResult();
+    }
+
+    public function getTreatmentByUserHistori($userId = null)
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, treatments.nama_treatment')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('user_id', $userId)
+            ->where("status_reservasi", 'selesai')
             ->orderBy('reservasi.tanggal_reservasi', 'asc')
             ->get();
 

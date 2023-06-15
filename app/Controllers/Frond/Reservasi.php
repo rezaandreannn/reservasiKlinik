@@ -51,6 +51,34 @@ class Reservasi extends BaseController
         return view('frond/reservasi', $data);
     }
 
+    public function getAuthHistori()
+    {
+        $loggedInUser = user()->id;
+        
+        $authReservasi = $this->reservasi->getTreatmentByUserHistori($loggedInUser);
+
+        $data = [
+            'authReservasi' => $authReservasi
+        ];
+        // \var_dump($authReservasi);
+
+        return view('frond/histori', $data);
+    }
+
+    public function cetakAuthHistori()
+    {
+        $loggedInUser = user()->id;
+        
+        $authReservasi = $this->reservasi->getTreatmentByUserHistori($loggedInUser);
+
+        $data = [
+            'authReservasi' => $authReservasi
+        ];
+      
+
+        return view('frond/cetak-histori', $data);
+    }
+
 
     public function create()
     {
@@ -115,7 +143,7 @@ class Reservasi extends BaseController
 
             return redirect()->to(base_url('reservasi-saya'))->with('message', 'Berhasil Melakukan Reservasi.\n'.$message.'');
         }else{
-            return redirect()->back()->with('error', 'Anda sudah melakukan reservasi pada tanggal' .' '. date('d/m/Y', strtotime($data['tanggal_reservasi'])));  
+            return redirect()->back()->with('error', 'Anda sudah melakukan reservasi dengan status pending pada tanggal' .' '. date('d/m/Y', strtotime($data['tanggal_reservasi'])));  
         }
     }else{
         return redirect()->back()->with('error', 'Waktu yang anda pilih sudah ada yang Reservasi');
@@ -211,6 +239,7 @@ class Reservasi extends BaseController
         ->where('tanggal_reservasi', $tanggal_reservasi)
             ->where('jam_mulai <', $jamSelesai)
             ->where('jam_selesai >', $jamMulai)
+            ->where('status_reservasi', 'pending')
             ->countAllResults();
 
         return ($existingReservation > 0) ? false : true;
@@ -221,12 +250,22 @@ class Reservasi extends BaseController
         $existingReservation = $this->reservasi
         ->where('tanggal_reservasi',  $tanggalReservasi)
         ->where('user_id',  $userId)
+        ->where('status_reservasi', 'pending')
         ->countAllResults();
 
         return ($existingReservation > 0) ? false : true;
 
     }
 
+    public function batalReservasi($id = null)
+    {
+        $data = [
+            'status_reservasi' => 'batal',
+        ];
+
+        $this->reservasi->update($id, $data); // simpan ke database
+         return redirect()->back()->with('message', 'Reservasi dibatalkan');
+    }
     // public function cetak()
     // {
     //     // create new PDF document

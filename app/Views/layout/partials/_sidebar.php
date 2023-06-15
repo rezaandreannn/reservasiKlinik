@@ -30,9 +30,21 @@
                             href="<?= base_url('masterdata/jadwal') ?>">Jadwal</a></li>
                 </ul>
             </li>
-            <li class="<?= $request->uri->getSegment(2) == 'user-reservasi' ? 'active' : '' ?>"><a class="nav-link"
+            <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'reservasi' ? 'active' : '' ?>">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-ticket-alt"></i>
+                    <span>User Reservasi</span></a>
+                <ul class="dropdown-menu">
+                    <li class="<?= $request->uri->getSegment(2) == 'bayar-offline' ? 'active' : '' ?>"><a
+                            class="nav-link" href="<?= base_url('reservasi/bayar-offline') ?>">Bayar Offline</a></li>
+                    <li class="<?= $request->uri->getSegment(2) == 'bayar-online' ? 'active' : '' ?>"><a
+                            class="nav-link" href="<?= base_url('reservasi/bayar-online') ?>">Bayar Online</a>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- <li class="<?= $request->uri->getSegment(2) == 'user-reservasi' ? 'active' : '' ?>"><a class="nav-link"
                     href="<?= base_url('admin/user-reservasi') ?>"><i class="far fa-square"></i>
-                    <span>User Reservasi</span></a></li>
+                    <span>User Reservasi</span></a></li> -->
 
 
             <li class="menu-header">Kelola</li>

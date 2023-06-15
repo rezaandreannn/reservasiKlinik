@@ -3,42 +3,30 @@
 <?= $this->section('main') ?>
 <section class="my-5 mb-5">
     <div class="container">
-        <h2>Reservasi Treatment</h2>
+        <h2>Histori Treatment</h2>
         <div class="row">
 
             <div class="col-12">
                 <div class="card border-light mb-3">
-                    <div class="card-header">Reservasi Saya</div>
+                    <div class="card-header d-flex justify-content-between">
+                        Histori Saya
+                        <a href="<?= base_url('histori-cetak') ?>" target="blink" class="btn btn-success">Cetak</a>
+                    </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Tanggal</th>
+                                    <th>Harga</th>
                                     <th>Jenis Treatment</th>
-                                    <th>Jam Mulai</th>
-                                    <th>Jam Selesai</th>
-                                    <th>Aksi</th>
+                                    <th>Tgl Selesai</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($authReservasi as  $value) : ?>
                                 <tr>
-                                    <td><?= $value->tanggal_reservasi ?></td>
+                                    <td>Rp. <?= format_rupiah($value->jumlah_bayar) ?></td>
                                     <td><?= $value->nama_treatment ?></td>
-                                    <td><?= $value->jam_mulai ?></td>
-                                    <td><?= $value->jam_selesai ?></td>
-                                    <td>
-                                        <a href="http://" class="btn btn-info btn-sm">Cetak</a>
-                                        <?php if($value->type_pembayaran == 'bayar online') : ?>
-                                        <a href="http://" class="btn btn-success btn-sm">Bayar</a>
-                                        <?php endif; ?>
-                                        <form method="post" action="<?= base_url('reservasi/batal/'. $value->id) ?>"
-                                            class="d-inline">
-                                            <input type="hidden" name="_method" value="PUT">
-                                            <?= csrf_field() ?>
-                                            <button class="btn btn-sm btn-danger">Batal</button>
-                                        </form>
-                                    </td>
+                                    <td><?=date('d/m/Y', strtotime($value->updated_at)) ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

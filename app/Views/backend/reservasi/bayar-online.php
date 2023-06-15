@@ -4,10 +4,10 @@
 <section class="section">
     <div class="section-header">
         <h1><?= $title ?>
-            <a href="<?= base_url('masterdata/treatment/baru') ?>" class="btn btn-primary mb-2"><i
+            <!-- <a href="<?= base_url('masterdata/treatment/baru') ?>" class="btn btn-primary mb-2"><i
                     class="fas fa-plus-circle"></i>
                 Tambah
-            </a>
+            </a> -->
 
         </h1>
 
@@ -15,14 +15,14 @@
             <?php foreach($breadcrumbs as $value => $url) : ?>
             <div class="breadcrumb-item active"><a href="#"><?= $value ?></a></div>
             <?php endforeach ?>
-            <div class="breadcrumb-item">Data treatment</div>
+            <div class="breadcrumb-item">Data reservasi</div>
         </div>
     </div>
 
 
     <div class="section-body">
         <div class="col-12 col-md-12 col-lg-12">
-            <p class="section-title">Menampilkan semua data treatment</p>
+            <p class="section-title">Menampilkan semua data reservasi yang bayar secara online</p>
 
             <div class="card">
                 <div class="card-body">
@@ -35,15 +35,16 @@
                                     <th rowspan="2" class="align-middle">Nama</th>
                                     <th rowspan="2" class="align-middle">Treatment</th>
                                     <th rowspan="2" class="align-middle">Tanggal</th>
-                                    <th rowspan="2" class="align-middle">Jumlah</th>
-                                    <th rowspan="2" class="align-middle">Tipe bayar</th>
-                                    <th colspan="2" class="text-center">status</th>
+                                    <th colspan="4" class="text-center">Pembayaran</th>
+                                    <th rowspan="2" class="align-middle">Status Reservasi</th>
                                     <th rowspan="2" class="align-middle text-center">Aksi</th>
                                 </tr>
                                 <tr>
                                     <!-- <th colspan="7"></th> -->
-                                    <th>Pembayaran</th>
-                                    <th>Reservasi</th>
+                                    <th>Bank</th>
+                                    <th>Jumlah</th>
+                                    <th>Bukti</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
 
@@ -55,22 +56,32 @@
                                     <td class="align-middle"><?= $no++ ?></td>
                                     <td class="align-middle"><?=$reservasi->kode_reservasi ?></td>
                                     <td class="align-middle"><?= $reservasi->username ?></td>
-                                    <td>
+                                    <td class="align-middle">
                                         <?= $reservasi->nama_treatment ?>
                                     </td>
                                     <td class="align-middle">
                                         <?= $reservasi->tanggal_reservasi ?>
                                     </td>
                                     <td class="align-middle">
+                                        <?= $reservasi->kode_bank ?>
+                                    </td>
+                                    <td class="align-middle">
                                         Rp. <?= format_rupiah($reservasi->jumlah_bayar) ?>
                                     </td>
                                     <td class="align-middle">
-                                        <?= $reservasi->type_pembayaran ?>
+
                                     </td>
                                     <td class="align-middle">
                                         <div
                                             class="badge badge-<?= $reservasi->status_bayar == 'belum lunas' ? 'danger' : 'success'  ?>">
                                             <?= $reservasi->status_bayar ?></div>
+                                        <?php if($reservasi->status_bayar != 'lunas') : ?>
+                                        <form action="" method="post" class="mt-1">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="id_reservasi" value="<?= $reservasi->id ?>">
+                                            <button class="badge badge-primary">Verifikasi</button>
+                                        </form>
+                                        <?php endif; ?>
                                     </td>
                                     <td class="align-middle">
                                         <?php if($reservasi->status_reservasi == 'pending') : ?>
@@ -82,17 +93,19 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="align-middle text-center p-2">
-                                        <a href="<?= base_url('masterdata/treatment/ubah/'.$reservasi->id) ?>"
-                                            class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        <!-- <a href="<?= base_url('masterdata/treatment/ubah/'.$reservasi->id) ?>"
+                                            class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a> -->
 
+                                        <?php if($reservasi->status_reservasi != 'selesai') : ?>
                                         <form method="post"
-                                            action="<?= base_url('masterdata/treatment/'. $reservasi->id) ?>"
+                                            action="<?= base_url('reservasi/delete/'. $reservasi->id) ?>"
                                             class="d-inline">
                                             <?= csrf_field()?>
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-sm btn-danger"><i
                                                     class="fas fa-trash-alt"></i></button>
                                         </form>
+                                        <?php endif; ?>
 
                                     </td>
                                 </tr>

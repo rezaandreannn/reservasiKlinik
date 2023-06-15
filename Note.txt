@@ -1,0 +1,7 @@
+*Note*
+
+1. upload bukti pembayaran via online
+2. profile admin
+3. edit user 
+4. cetak reservasi by user
+5. verified user upload bukti

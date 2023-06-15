@@ -24,7 +24,7 @@
                             <?= format_time($treatment->durasi) ?></small>
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-text mb-0">
-                                <strong><?= format_rupiah($treatment->harga) ?></strong>
+                                <strong>Rp. <?= format_rupiah($treatment->harga) ?></strong>
                             </p>
                             <a href="<?= base_url('reservasi/' . $treatment->id) ?>"
                                 class="btn btn-primary">Reservasi</a>

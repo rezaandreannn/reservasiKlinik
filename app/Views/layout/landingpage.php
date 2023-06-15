@@ -89,6 +89,10 @@
                         <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'reservasi-saya' ? 'active' : '' ?>"
                             href="<?= base_url('reservasi-saya') ?>">Reservasi</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?= $request->uri->getSegment(1) == 'histori' ? 'active' : '' ?>"
+                            href="<?= base_url('histori') ?>">Histori</a>
+                    </li>
                     <?php endif; ?>
                 </ul>
 
@@ -131,16 +135,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">username</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Profil</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col-6">Nama
+                        </div>
+                        <div class="col-6">: <?= user()->username ?? '' ?>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">Email
                         </div>
-                        <div class="col-6">fjdsgfjkdsf
+                        <div class="col-6">: <?= user()->email ?? '' ?>
                         </div>
                     </div>
                 </div>
