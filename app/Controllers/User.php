@@ -51,8 +51,52 @@ class User extends BaseController
     }
 
     public function edit($id = null){
-       
-        return view('user/edit');
+        $data = [
+            'title' => 'Edit Pengguna',
+            'breadcrumbs' => [
+                'Dashboard' => '',
+                'User' => '',
+            ],
+            'user' => $this->user->find($id),
+        ];
+
+        return view('user/edit', $data);    
+    }
+
+    public function update($id = null)
+    {
+
+        $users = model(UserModel::class);
+        $rules = [
+            'username' => [
+                'label' => 'Nama',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.',
+                ]
+            ],
+            'no_telp' => [
+                'label' => 'No Telp',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Bidang {field} Tidak Boleh Kosong.',
+                ]
+            ],
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        
+        $user = $users->where('id', $id)
+            ->first();
+            
+        $user->username = $this->request->getPost('username');
+        $user->no_telp = $this->request->getPost('no_telp');
+        $users->save($user);
+
+    return redirect()->to(base_url('admin/pengguna'))->with('message', 'Berhasil mengubah pengguna');
     }
 
     public function manageRole(){

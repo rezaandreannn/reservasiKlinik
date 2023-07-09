@@ -111,4 +111,47 @@ class ReservasiModel extends Model
 
         return $query->getResult();
     }
+
+    public function getReservasiFailed()
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('*')
+            ->where("status_reservasi", 'pending')
+            ->where("DATE(tanggal_reservasi) <= CURDATE()")
+            ->get();
+
+        return $query->getResult();
+    }
+
+    public function showDetailPembayaran($id = null)
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, users.username, treatments.nama_treatment, bank.kode_bank, bank.no_rekening')
+            ->join('users', 'users.id = reservasi.user_id')
+            ->join('bank', 'bank.id = reservasi.bank_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('reservasi.id', $id)
+            ->get();
+
+        return $query->getRow();
+    }
+
+    public function reportByTanggal($start_date = null, $end_date = null)
+    {
+        $db = \Config\Database::connect();
+
+        $query = $db->table($this->table)
+            ->select('reservasi.*, users.username, treatments.nama_treatment, bank.kode_bank, bank.no_rekening')
+            ->join('users', 'users.id = reservasi.user_id')
+            ->join('bank', 'bank.id = reservasi.bank_id')
+            ->join('treatments', 'treatments.id = reservasi.treatment_id')
+            ->where('reservasi.tanggal_reservasi BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"')
+            ->get();
+
+        return $query->getResult();
+    }
 }

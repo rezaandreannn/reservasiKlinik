@@ -19,6 +19,7 @@ class UserReservasi extends BaseController
     public function index()
     {
 
+       
         $data = [
             'title' => 'User Reservasi',
             'breadcrumbs' => [
@@ -27,13 +28,19 @@ class UserReservasi extends BaseController
             'reservasis' => $this->reservasi->getAll()
         ];
 
-        // var_dump($data['reservasis']);
-        // die;
         return view('backend/user-reservasi', $data);
     }
 
     public function getBayarOnline()
     {
+
+         // jika tanggal reservasi sudah lewat yg status pending dari tanggal sekarang maka ubah status reservasi menjadi batal
+         $reservasis = $this->reservasi->getReservasiFailed();
+        //  dd($reservasis);
+        foreach ($reservasis as  $reservasi) {
+            $this->reservasi->update($reservasi->id, ['status_reservasi' => 'batal']);
+        }
+ 
         $data = [
             'title' => 'Pembayaran Online',
             'breadcrumbs' => [
@@ -49,6 +56,13 @@ class UserReservasi extends BaseController
 
     public function getBayarOffline()
     {
+        //  // jika tanggal reservasi sudah lewat yg status pending dari tanggal sekarang maka ubah status reservasi menjadi batal
+        //  $reservasis = $this->reservasi->getReservasiFailed();
+        // //  dd($reservasis);
+        // foreach ($reservasis as  $reservasi) {
+        //     $this->reservasi->update($reservasi->id, ['status_reservasi' => 'batal']);
+        // }
+
         $data = [
             'title' => 'Pembayaran Offline',
             'breadcrumbs' => [
@@ -78,7 +92,14 @@ class UserReservasi extends BaseController
 
         $this->reservasi->delete($id);
         return redirect()->back()->with('message', 'Berhasil menghapus reservasi');
+    }
 
-
+    public function verified($id = null)
+    {
+        $data = [
+            'status_bayar'=> 'lunas'
+        ];
+        $this->reservasi->update($id, $data);
+        return redirect()->back()->with('message', 'berhasil melakukan konfirmasi pembayaran');
     }
 }

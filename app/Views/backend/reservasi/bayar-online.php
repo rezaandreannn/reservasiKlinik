@@ -69,18 +69,23 @@
                                         Rp. <?= format_rupiah($reservasi->jumlah_bayar) ?>
                                     </td>
                                     <td class="align-middle">
-
+                                        <img src="<?= base_url('images/pembayaran/'. $reservasi->bukti_bayar) ?>" alt=""
+                                            class="img-thumbnail img-fluid">
                                     </td>
                                     <td class="align-middle">
                                         <div
                                             class="badge badge-<?= $reservasi->status_bayar == 'belum lunas' ? 'danger' : 'success'  ?>">
                                             <?= $reservasi->status_bayar ?></div>
                                         <?php if($reservasi->status_bayar != 'lunas') : ?>
-                                        <form action="" method="post" class="mt-1">
+
+                                        <form method="post"
+                                            action="<?= base_url('reservasi/bayar-online/'. $reservasi->id) ?>"
+                                            class="mt-1">
+                                            <input type="hidden" name="_method" value="PUT">
                                             <?= csrf_field() ?>
-                                            <input type="hidden" name="id_reservasi" value="<?= $reservasi->id ?>">
                                             <button class="badge badge-primary">Verifikasi</button>
                                         </form>
+
                                         <?php endif; ?>
                                     </td>
                                     <td class="align-middle">

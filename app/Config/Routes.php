@@ -4,9 +4,12 @@ namespace Config;
 
 use App\Controllers\Role;
 use App\Controllers\User;
+use App\Controllers\Report;
+use App\Controllers\Profile;
 use App\Controllers\Dashboard;
 use App\Controllers\Categories;
 use App\Controllers\Permission;
+use App\Controllers\Frond\Bayar;
 use App\Controllers\UserReservasi;
 use App\Controllers\RoleHasPermission;
 
@@ -43,6 +46,9 @@ $routes->get('/treatment', 'Frond\Treatment::index');
 $routes->get('/reservasi/(:num)', 'Frond\Reservasi::index/$1');
 $routes->post('/reservasi', 'Frond\Reservasi::create');
 $routes->put('/reservasi/batal/(:num)', 'Frond\Reservasi::batalReservasi/$1');
+$routes->get('/bayar/(:num)', 'Frond\Bayar::index/$1');
+$routes->put('/bayar/(:num)', 'Frond\Bayar::proses/$1');
+$routes->get('/reservasi/detail/(:num)', 'Frond\Reservasi::detail/$1');
 
 $routes->get('/reservasi-saya', 'Frond\Reservasi::getAuth');
 $routes->get('/histori', 'Frond\Reservasi::getAuthHistori');
@@ -62,11 +68,16 @@ $routes->get('/dashboard', 'Dashboard::index',  ['filter' => 'role:admin']);
 
 $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
 
+    $routes->get('profile', 'Profile::index');
+    $routes->get('report', 'Report::index');
+    $routes->post('report/cetak', 'Report::cetak');
+
     // routes manage user
     $routes->get('pengguna', 'User::index');
     $routes->get('pengguna/restore/(:num)', 'User::restore/$1');
     $routes->get('pengguna/show/(:num)', 'User::show/$1');
     $routes->get('pengguna/edit/(:num)', 'User::edit/$1');
+    $routes->put('pengguna/(:num)', 'User::update/$1');
     $routes->post('manage_role', 'User::manageRole');
     $routes->delete('pengguna/(:num)', 'User::delete/$1');
     $routes->delete('pengguna/force/(:num)', 'User::forceDelete/$1');
@@ -99,8 +110,9 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
         $routes->get('bayar-offline', 'UserReservasi::getBayarOffline');
         $routes->put('bayar-offline/(:num)', 'UserReservasi::updateBayarOffline/$1');
         $routes->get('bayar-online', 'UserReservasi::getBayarOnline');
+        $routes->put('bayar-online/(:num)', 'UserReservasi::verified/$1');
         $routes->delete('delete/(:num)', 'UserReservasi::delete/$1');
-        });
+    });
 
 // route master data
 $routes->group('masterdata', ['filter' => 'role:admin'], function($routes) {

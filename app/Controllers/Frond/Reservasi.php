@@ -75,7 +75,6 @@ class Reservasi extends BaseController
             'authReservasi' => $authReservasi
         ];
       
-
         return view('frond/cetak-histori', $data);
     }
 
@@ -110,14 +109,10 @@ class Reservasi extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-       
-
-
     $data = $this->request->getPost(); //ambil inputan post
 
     $jumlahBayar = intval(str_replace('.','', $this->request->getPost('jumlah_bayar')));
   
-
     $data['type_pembayaran'] = $this->request->getPost('type_bayar');
     if ($this->request->getPost('type_bayar') == 'bayar online') {
        $data['bank_id'] = $this->request->getPost('bank_id');
@@ -265,6 +260,16 @@ class Reservasi extends BaseController
 
         $this->reservasi->update($id, $data); // simpan ke database
          return redirect()->back()->with('message', 'Reservasi dibatalkan');
+    }
+
+    public function detail($id = null)
+    {
+        $data = [
+            'title' => 'Detail Reservasi',
+            'reservasi' => $this->reservasi->showDetailPembayaran($id)
+        ];
+
+        return view('frond/detail', $data);
     }
     // public function cetak()
     // {

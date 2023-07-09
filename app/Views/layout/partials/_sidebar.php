@@ -15,6 +15,9 @@
             <li class="<?= $request->uri->getSegment(1) == 'dashboard' ? 'active' : '' ?>"><a class="nav-link"
                     href="<?= base_url('dashboard') ?>"><i class="fas fa-chart-line"></i>
                     <span>Dashboard</span></a></li>
+            <li class="<?= $request->uri->getSegment(2) == 'report' ? 'active' : '' ?>"><a class="nav-link"
+                    href="<?= base_url('admin/report') ?>"><i class="fas fa-table"></i></i>
+                    <span>Laporan</span></a></li>
             <li class="menu-header">Master Data</li>
             <li class="nav-item dropdown <?= $request->uri->getSegment(1) == 'masterdata' ? 'active' : '' ?>">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>

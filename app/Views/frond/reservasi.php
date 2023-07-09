@@ -15,6 +15,7 @@
                                 <tr>
                                     <th>Tanggal</th>
                                     <th>Jenis Treatment</th>
+                                    <th>Tipe Bayar</th>
                                     <th>Jam Mulai</th>
                                     <th>Jam Selesai</th>
                                     <th>Aksi</th>
@@ -25,12 +26,19 @@
                                 <tr>
                                     <td><?= $value->tanggal_reservasi ?></td>
                                     <td><?= $value->nama_treatment ?></td>
+                                    <td><?= $value->type_pembayaran ?></td>
                                     <td><?= $value->jam_mulai ?></td>
                                     <td><?= $value->jam_selesai ?></td>
                                     <td>
-                                        <a href="http://" class="btn btn-info btn-sm">Cetak</a>
+                                        <!-- <a href="http://" class="btn btn-info btn-sm">Cetak</a> -->
                                         <?php if($value->type_pembayaran == 'bayar online') : ?>
-                                        <a href="http://" class="btn btn-success btn-sm">Bayar</a>
+                                        <?php if($value->bukti_bayar != null) : ?>
+                                        <a href="<?= base_url('reservasi/detail/'. $value->id) ?>"
+                                            class="btn btn-warning btn-sm">Detail</a>
+                                        <?php else : ?>
+                                        <a href="<?= base_url('bayar/'. $value->id) ?>"
+                                            class="btn btn-success btn-sm">Bayar</a>
+                                        <?php endif; ?>
                                         <?php endif; ?>
                                         <form method="post" action="<?= base_url('reservasi/batal/'. $value->id) ?>"
                                             class="d-inline">
