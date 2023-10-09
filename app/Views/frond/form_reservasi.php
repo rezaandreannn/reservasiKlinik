@@ -25,12 +25,13 @@
               <div class="form-group">
                 <label for="jam_mulai">Jam Mulai</label>
                 <input type="time" class="form-control <?= session('errors.jam_mulai') ? 'is-invalid' : '' ?>"
-                  id="jam_mulai" name="jam_mulai">
+                  id="jam_mulai" name="jam_mulai" onchange="setMinuteToZero(this)">
                 <div class="invalid-feedback">
                   <?= session('errors.jam_mulai') ?>
                 </div>
                 <span id="jam_mulai_message" class="text-danger"></span>
               </div>
+
 
               <div class="form-group">
                 <label for="jam_selesai">Jam Selesai</label>
@@ -41,7 +42,8 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <input class="form-check-input" type="hidden" name="type_bayar" id="bayar_online" value="bayar online">
+              <!-- <div class="form-group">
                 <label for="type_bayar">Tipe Bayar</label>
                 <div class="row">
                   <div class="col-5">
@@ -64,14 +66,14 @@
                   </div>
                   <div class="col-2"></div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="jumlah_bayar">Jumlah bayar</label>
                 <input type="text" name="jumlah_bayar" value="<?= format_rupiah($treatment->harga) ?>"
                   class="form-control" readonly>
               </div>
               <!-- show bayar online -->
-              <div class="show-bayar-online" style="display: none;">
+              <div class="show-bayar-online">
                 <div class="form-group">
                   <label for="bank"></label>
                   <select name="bank_id" id="bank_id" class="form-control">
@@ -139,6 +141,26 @@
     showBayarOnline.style.display = "block"; // Tampilkan pilihan bank
   });
 </script>
+
+<script>
+  function setMinuteToZero(input) {
+    // Dapatkan nilai waktu yang dimasukkan oleh pengguna
+    var inputTime = input.value;
+
+    // Pisahkan jam dan menit menjadi array
+    var timeParts = inputTime.split(':');
+
+    // Ambil jam
+    var jam = timeParts[0];
+
+    // Tetapkan menit ke 00
+    var waktuBaru = jam + ':00';
+
+    // Setel nilai input waktu ke waktu baru
+    input.value = waktuBaru;
+  }
+</script>
+
 
 <script>
   $(document).ready(function () {
@@ -221,6 +243,7 @@
     });
   });
 </script>
+
 
 <script>
   function validateInput() {

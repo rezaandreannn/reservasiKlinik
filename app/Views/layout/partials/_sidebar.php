@@ -37,10 +37,10 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-ticket-alt"></i>
                     <span>User Reservasi</span></a>
                 <ul class="dropdown-menu">
-                    <li class="<?= $request->uri->getSegment(2) == 'bayar-offline' ? 'active' : '' ?>"><a
-                            class="nav-link" href="<?= base_url('reservasi/bayar-offline') ?>">Bayar Offline</a></li>
+                    <!-- <li class="<?= $request->uri->getSegment(2) == 'bayar-offline' ? 'active' : '' ?>"><a
+                            class="nav-link" href="<?= base_url('reservasi/bayar-offline') ?>">Bayar Offline</a></li> -->
                     <li class="<?= $request->uri->getSegment(2) == 'bayar-online' ? 'active' : '' ?>"><a
-                            class="nav-link" href="<?= base_url('reservasi/bayar-online') ?>">Bayar Online</a>
+                            class="nav-link" href="<?= base_url('reservasi/bayar-online') ?>">Pembayaran</a>
                     </li>
 
                 </ul>

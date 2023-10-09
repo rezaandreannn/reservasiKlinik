@@ -127,6 +127,7 @@ class ReservasiModel extends Model
 
     public function showDetailPembayaran($id = null)
     {
+      
         $db = \Config\Database::connect();
 
         $query = $db->table($this->table)
@@ -136,6 +137,7 @@ class ReservasiModel extends Model
             ->join('treatments', 'treatments.id = reservasi.treatment_id')
             ->where('reservasi.id', $id)
             ->get();
+           
 
         return $query->getRow();
     }

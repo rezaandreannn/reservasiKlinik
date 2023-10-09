@@ -14,13 +14,13 @@
                             <div class="col-5">Nama</div>
                             <div class="col-7">: <?= user()->username ?></div>
                             <div class="col-5">Tgl. Reservasi</div>
-                            <div class="col-7">: <?= $reservasi->tanggal_reservasi ?></div>
-                            <div class="col-5">Tipe Bayar</div>
-                            <div class="col-7">: <?= $reservasi->type_pembayaran ?></div>
+                            <div class="col-7">: <?= $reservasi->tanggal_reservasi ?? '' ?></div>
+                            <!-- <div class="col-5">Tipe Bayar</div>
+                            <div class="col-7">: <?= $reservasi->type_pembayaran ?? '' ?></div> -->
                             <div class="col-5">Kode Bank</div>
-                            <div class="col-7">: <?= $reservasi->kode_bank ?></div>
+                            <div class="col-7">: <?= $reservasi->kode_bank ??'' ?></div>
                             <div class="col-5">No. Rekening</div>
-                            <div class="col-7">: <?= $reservasi->no_rekening ?> </div>
+                            <div class="col-7">: <?= $reservasi->no_rekening ??'' ?> </div>
                             <div class="col-5">Total Bayar</div>
                             <div class="col-7">: Rp. <?= format_rupiah($reservasi->jumlah_bayar) ?></div>
                         </div>
